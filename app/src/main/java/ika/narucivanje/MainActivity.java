@@ -4,18 +4,35 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.ViewModel;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+
+import ika.narucivanje.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String LOG_TAG = "activity-lifecycle";
 
+    private ActivityMainBinding activityMainBinding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
+
+        activityMainBinding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activityMainBinding.textView.setText("Promenjeno nakon klika iz ClickListenera");
+            }
+        });
+
     }
 
     @Override
