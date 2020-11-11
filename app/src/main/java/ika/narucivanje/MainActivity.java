@@ -47,12 +47,20 @@ public class MainActivity extends AppCompatActivity {
             int quantity = Integer.parseInt(activityMainBinding.editText.getText().toString());
             myViewModel.setQuantity(quantity);
         });
-
     }
 
+    /*
+    * Poziva se pre nego sto onDestory() moze biti pozvan
+    * Ovu metodu treba iskoristiti za cuvanje svih neophodnih podataka koje ne bismo smeli izgubiti
+    * */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
+
+        if(myViewModel.getQuantity().getValue() != null){
+            outState.putInt("QUANTITY_KEY",myViewModel.getQuantity().getValue());
+        }
+
         Log.d(LOG_TAG, "onSaveInstanceState() called");
     }
 
