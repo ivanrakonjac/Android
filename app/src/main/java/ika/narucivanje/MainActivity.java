@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getLifecycle().addObserver(new MyLifeCycleAwareComponent());
+
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
@@ -62,35 +64,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Log.d(LOG_TAG, "onSaveInstanceState() called");
-    }
-
-
-    public void onStart() {
-        super.onStart();
-        Log.d(LOG_TAG, "OnStart() called");
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d(LOG_TAG, "OnResume() called");
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        Log.d(LOG_TAG, "OnPause() called");
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d(LOG_TAG, "OnStop() called");
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(LOG_TAG, "OnDestroy() called");
     }
 }
