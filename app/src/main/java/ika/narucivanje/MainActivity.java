@@ -26,11 +26,8 @@ public class MainActivity extends AppCompatActivity {
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
 
-        activityMainBinding.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                activityMainBinding.textView.setText("Promenjeno nakon klika iz ClickListenera");
-            }
+        activityMainBinding.button.setOnClickListener(view -> {
+            activityMainBinding.textView.setText("Promenjeno nakon klika iz ClickListenera");
         });
 
     }
