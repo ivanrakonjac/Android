@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RunningApp</string>
+    <string name="tezina">Tezina</string>
+    <string name="visina">Visina</string>
+    <string name="godine">Godine</string>
+    <string name="duration">Trajanje</string>
+</resources>
