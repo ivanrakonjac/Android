@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         activityMainBinding.button.setOnClickListener(view -> {
-            int quantity = Integer.parseInt(activityMainBinding.editText.getText().toString());
+            int quantity = Integer.parseInt(activityMainBinding.kolicinaEditText.getText().toString());
             myViewModel.setQuantity(quantity);
         });
     }

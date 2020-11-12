@@ -8,12 +8,151 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <EditText
-        android:id="@+id/editText"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Unesite kolicnu"
-        android:layout_marginTop="10dp"/>
+        android:orientation="horizontal"
+        style="@style/LinearLayoutMargine">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/ime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Ime"
+            android:layout_weight="0.5"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/imeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/prezime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prezime"
+            android:layout_weight="0.5"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/prezimeEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/adresa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Adresa"
+        style="@style/EditTextMargineVanLinLayouta">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/adresaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPostalAddress"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="@style/LinearLayoutMargine">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/grad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Grad"
+            android:layout_weight="0.5"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/gradEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/postanskiBroj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Postanski broj"
+            android:layout_weight="0.5"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/postanskiBrojEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        style="@style/LinearLayoutMargine">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/kolicina"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Kolicina"
+            android:layout_weight="0.5"
+            app:suffixText="kom"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/kolicinaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/vrsta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Vrsta"
+            android:layout_weight="0.5"
+            style="@style/EditTextMargine">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/vrstaEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/telefon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Telefon"
+        style="@style/EditTextMargineVanLinLayouta">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/telefonEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button"
