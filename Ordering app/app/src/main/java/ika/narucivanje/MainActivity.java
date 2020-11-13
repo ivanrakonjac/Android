@@ -1,6 +1,7 @@
 package ika.narucivanje;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
@@ -8,12 +9,17 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Toast;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.Date;
 
 import ika.narucivanje.databinding.ActivityMainBinding;
 
@@ -41,14 +47,24 @@ public class MainActivity extends AppCompatActivity {
         * Kacimo observer na njega, i prosledjujemo zivotni ciklus objekta koji ga posmatra (observuje)
         * Nakon toga definisemo sta se desava onChanged
          */
-        myViewModel.getQuantity().observe(this, new Observer<Integer>() {
+        myViewModel.getLastChange().observe(this, new Observer<Date>() {
             @Override
-            public void onChanged(Integer integer) {
-                activityMainBinding.textView.setText("Kolicina: " + integer);
+            public void onChanged(Date datum) {
+                activityMainBinding.textView.setText("Naruceno: \n" +
+                        "Ime:\t" + myViewModel.getIme().getValue() + "\n" +
+                        "Prezime:\t" + myViewModel.getPrezime().getValue() + "\n" +
+                        "Adresa:\t" + myViewModel.getAdresa().getValue() + "\n" +
+                        "Grad:\t" + myViewModel.getGrad().getValue() + "\n" +
+                        "Postanski broj:\t" + myViewModel.getPostanskiBroj().getValue() + "\n" +
+                        "Kolicina:\t" + myViewModel.getKolicina().getValue() + "\n" +
+                        "Vrsta:\t" + myViewModel.getVrsta().getValue() + "\n" +
+                        "Telefon:\t" + myViewModel.getTelefon().getValue() + "\n" +
+                        "Vreme:\t" + myViewModel.getLastChange().getValue());
             }
         });
 
         activityMainBinding.button.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
 
@@ -130,6 +146,11 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                /**
+                 * Ako su sva polja popunjena mogu se updejtovati vrednosti
+                 */
+                myViewModel.updateValues(ime,prezime,adresa,grad,postanskiBroj,kolicina,vrstaProizvoda,telefon);
+
             }
         });
 
@@ -146,14 +167,22 @@ public class MainActivity extends AppCompatActivity {
 
     /*
     * Poziva se pre nego sto onDestory() moze biti pozvan
-    * Ovu metodu treba iskoristiti za cuvanje svih neophodnih podataka koje ne bismo smeli izgubiti
+    * Ovu metodu treba iskoristiti za cuvanje svih neophodnih podataka koje ne bismo smeli izgubiti ubijanjem nase Aktivnosti (i Modela)
+    * Bundle objekat ce preziveti to ubijanje pa podatke cuvamo u njemu
     * */
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
 
-        if(myViewModel.getQuantity().getValue() != null){
-            outState.putInt("QUANTITY_KEY",myViewModel.getQuantity().getValue());
+        if(myViewModel.isModelHasData() == true){
+            outState.putString("IME_KEY",myViewModel.getIme().getValue());
+            outState.putString("PREZIME_KEY",myViewModel.getPrezime().getValue());
+            outState.putString("ADRESA_KEY",myViewModel.getAdresa().getValue());
+            outState.putString("GRAD_KEY",myViewModel.getGrad().getValue());
+            outState.putInt("POSTANSKI_BR_KEY",myViewModel.getPostanskiBroj().getValue());
+            outState.putInt("KOLICINA_KEY",myViewModel.getKolicina().getValue());
+            outState.putString("VRSTA_KEY",myViewModel.getVrsta().getValue());
+            outState.putString("TELEFON_KEY",myViewModel.getTelefon().getValue());
         }
 
         Log.d(LOG_TAG, "onSaveInstanceState() called");
