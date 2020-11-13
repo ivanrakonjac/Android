@@ -123,12 +123,19 @@
                 />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Spinner
-            android:id="@+id/planets_spinner"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Vrsta"
             android:layout_weight="0.5"
-            style="@style/SpinnerMargine"/>
+            style="@style/PopUpMenuMargine">
+
+            <AutoCompleteTextView
+                android:id="@+id/vrsta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

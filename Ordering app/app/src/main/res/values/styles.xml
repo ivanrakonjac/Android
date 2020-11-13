@@ -12,7 +12,7 @@
         <item name="android:layout_marginLeft">16dp</item>
     </style>
 
-    <style name="SpinnerMargine">
+    <style name="PopUpMenuMargine" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="android:layout_marginRight">16dp</item>
         <item name="android:layout_marginLeft">16dp</item>
     </style>
@@ -28,3 +28,5 @@
     </style>
 
 </resources>
+
+

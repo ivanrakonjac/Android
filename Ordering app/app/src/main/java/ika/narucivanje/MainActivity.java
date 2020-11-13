@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import ika.narucivanje.databinding.ActivityMainBinding;
 
@@ -51,10 +52,9 @@ public class MainActivity extends AppCompatActivity {
             myViewModel.setQuantity(quantity);
         });
 
-
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.vrsta_proizvoda, android.R.layout.simple_spinner_item);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        activityMainBinding.planetsSpinner.setAdapter(arrayAdapter);
+        String[] vrsteProizvoda = getResources().getStringArray(R.array.vrsta_proizvoda);
+        ArrayAdapter<String> vrsteProizvodaAdapter = new ArrayAdapter<>(this, R.layout.dropdown_menu_popup_item, vrsteProizvoda);
+        activityMainBinding.vrsta.setAdapter(vrsteProizvodaAdapter);
 
     }
 
