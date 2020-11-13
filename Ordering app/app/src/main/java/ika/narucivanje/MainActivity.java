@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 
 import ika.narucivanje.databinding.ActivityMainBinding;
 
@@ -49,6 +50,12 @@ public class MainActivity extends AppCompatActivity {
             int quantity = Integer.parseInt(activityMainBinding.kolicinaEditText.getText().toString());
             myViewModel.setQuantity(quantity);
         });
+
+
+        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.vrsta_proizvoda, android.R.layout.simple_spinner_item);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        activityMainBinding.planetsSpinner.setAdapter(arrayAdapter);
+
     }
 
     /*
