@@ -18,7 +18,7 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="ika.test.runningapp.MainActivity" >
+        <activity android:name="ika.test.runningapp.calories.CaloriesActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
