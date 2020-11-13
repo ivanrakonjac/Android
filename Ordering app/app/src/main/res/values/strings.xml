@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Narucivanje</string>
+    <string name="error_message">Prazno polje!</string>
 </resources>
