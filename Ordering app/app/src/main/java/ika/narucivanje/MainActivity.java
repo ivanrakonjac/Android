@@ -9,6 +9,7 @@ import androidx.lifecycle.OnLifecycleEvent;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import java.time.LocalTime;
 import java.util.Date;
 
 import ika.narucivanje.databinding.ActivityMainBinding;
+import ika.narucivanje.proizvodi.ProizvodiActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -60,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
                         "Vrsta:\t" + myViewModel.getVrsta().getValue() + "\n" +
                         "Telefon:\t" + myViewModel.getTelefon().getValue() + "\n" +
                         "Vreme:\t" + myViewModel.getLastChange().getValue());
+            }
+        });
+
+        activityMainBinding.predjiDalje.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(v.getContext(), ProizvodiActivity.class);
+                startActivity(intent);
             }
         });
 

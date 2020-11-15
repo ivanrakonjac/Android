@@ -166,6 +166,14 @@
         android:gravity="center"
         android:layout_margin="20dp"/>
 
+    <Button
+        android:id="@+id/predjiDalje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="PREDJI DALJE"
+        android:gravity="center"
+        android:layout_margin="20dp"/>
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
