@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
     },
     {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
@@ -26,6 +30,10 @@
     {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_kosutnjak.jpg.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\drawable\\kosutnjak.jpg"
     },
     {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
@@ -52,11 +60,19 @@
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_view_holder_route.xml.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\layout\\view_holder_route.xml"
+    },
+    {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
     },
     {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_route_browse.xml.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\layout\\activity_route_browse.xml"
     }
 ]

@@ -18,13 +18,15 @@
         android:supportsRtl="true"
         android:testOnly="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="ika.test.runningapp.calories.CaloriesActivity" >
+        <activity android:name="ika.test.runningapp.routes.RouteBrowseActivity" />
+        <activity android:name="ika.test.runningapp.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="ika.test.runningapp.calories.CaloriesActivity" />
     </application>
 
 </manifest>

@@ -47,6 +47,13 @@ animator mtrl_fab_transformation_sheet_collapse_spec
 animator mtrl_fab_transformation_sheet_expand_spec
 array met_strings
 array met_values
+array route_descriptions
+array route_difficulties
+array route_difficulties_phrases
+array route_images
+array route_lengths
+array route_locations
+array route_names
 attr actionBarDivider
 attr actionBarItemBackground
 attr actionBarPopupTheme
@@ -1042,6 +1049,7 @@ dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
 dimen action_bar_size
 dimen appcompat_dialog_background_inset
+dimen buttonMargins
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
 dimen cardview_default_radius
@@ -1414,6 +1422,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable kosutnjak
 drawable material_ic_calendar_black_24dp
 drawable material_ic_clear_black_24dp
 drawable material_ic_edit_black_24dp
@@ -1520,7 +1529,9 @@ id barrier
 id beginning
 id blocking
 id bottom
+id buttonCalories
 id buttonPanel
+id buttonRoutes
 id cancel_button
 id center
 id center_horizontal
@@ -1659,12 +1670,18 @@ id pin
 id progress_circular
 id progress_horizontal
 id radio
+id recyclerView
 id rezultat
 id rezultatPotrebnoKalorija
 id right
 id right_icon
 id right_side
 id rounded
+id routDuzina
+id routImage
+id routLabel
+id routName
+id routTezina
 id row_index_key
 id save_non_transition_alpha
 id save_overlay_view
@@ -1826,6 +1843,8 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_calories
+layout activity_main
+layout activity_route_browse
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -1894,6 +1913,7 @@ layout text_view_with_line_height_from_layout
 layout text_view_with_line_height_from_style
 layout text_view_with_theme_line_height
 layout text_view_without_line_height
+layout view_holder_route
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -1983,6 +2003,9 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string route_difficulty_label
+string route_label
+string route_length_label
 string search_menu_title
 string status_bar_notification_info_overflow
 string tezina

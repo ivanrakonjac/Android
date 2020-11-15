@@ -9,6 +9,7 @@ import android.view.View;
 
 import ika.test.runningapp.calories.CaloriesActivity;
 import ika.test.runningapp.databinding.ActivityMainBinding;
+import ika.test.runningapp.routes.RouteBrowseActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,8 +27,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent explicitIntent = new Intent();
-                //intent.setComponent(new ComponentName("ika.test.runningapp","ika.test.runningapp.calories.CaloriesActivity"));
                 explicitIntent.setClass(v.getContext(), CaloriesActivity.class);
+                startActivity(explicitIntent);
+            }
+        });
+
+        binding.buttonRoutes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent explicitIntent = new Intent();
+                explicitIntent.setClass(v.getContext(), RouteBrowseActivity.class);
                 startActivity(explicitIntent);
             }
         });
