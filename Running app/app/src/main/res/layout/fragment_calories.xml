@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calories.CaloriesActivity">
+    tools:context=".calories.CaloriesFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/weight"
@@ -42,19 +42,19 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/age"
-        android:hint="@string/godine"
         style="@style/MaterialEditTextConstrain"
-        app:suffixText="god"
-
+        android:hint="@string/godine"
         app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toLeftOf="@id/sex"
         app:layout_constraintTop_toBottomOf="@id/weight"
-        app:layout_constraintRight_toLeftOf="@id/sex">
+        app:suffixText="god">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/ageEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
@@ -82,19 +82,21 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/duration"
-        android:hint="@string/duration"
         style="@style/MaterialEditTextConstrain"
-        app:suffixText="min"
+        android:layout_marginStart="106dp"
 
+
+        android:hint="@string/duration"
+        app:layout_constraintEnd_toEndOf="@+id/age"
+        app:layout_constraintStart_toStartOf="@+id/age"
         app:layout_constraintTop_toBottomOf="@id/age"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@+id/age">
+        app:suffixText="min">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/durationEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner

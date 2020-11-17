@@ -1,20 +1,26 @@
 package ika.test.runningapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.ComponentName;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.MenuItem;
 
-import ika.test.runningapp.calories.CaloriesActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import ika.test.runningapp.calories.CaloriesFragment;
 import ika.test.runningapp.databinding.ActivityMainBinding;
-import ika.test.runningapp.routes.RouteBrowseActivity;
-import ika.test.runningapp.settings.SettingsActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private FragmentManager fragmentManager;
+
+    private CaloriesFragment caloriesFragment;
+
+    private static final String CALORIES_TAG = "fragment-calories-tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,31 +30,32 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.buttonCalories.setOnClickListener(new View.OnClickListener() {
+        fragmentManager = getSupportFragmentManager();
+
+        if(fragmentManager.getFragments().size()==0){
+            caloriesFragment = new CaloriesFragment();
+            fragmentManager
+                    .beginTransaction()
+                    .add(R.id.frame_layout, caloriesFragment, CALORIES_TAG)
+                    .commit();
+        }else{
+            caloriesFragment =(CaloriesFragment) fragmentManager.findFragmentByTag(CALORIES_TAG);
+        }
+
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                Intent explicitIntent = new Intent();
-                explicitIntent.setClass(v.getContext(), CaloriesActivity.class);
-                startActivity(explicitIntent);
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_item_calories:
+                        return true;
+                    case  R.id.menu_item_routes:
+                        return true;
+                    case R.id.menu_item_settings:
+                        return true;
+                }
+                return false;
             }
         });
 
-        binding.buttonRoutes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent explicitIntent = new Intent();
-                explicitIntent.setClass(v.getContext(), RouteBrowseActivity.class);
-                startActivity(explicitIntent);
-            }
-        });
-
-        binding.settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(v.getContext(), SettingsActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }
