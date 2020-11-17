@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="setting_array">
+        <item>Connections</item>
+        <item>Sound</item>
+        <item>Notifications</item>
+        <item>Display</item>
+        <item>Advanced features</item>
+        <item>Apps</item>
+        <item>Wallpapers</item>
+        <item>Google</item>
+        <item>Storage</item>
+        <item>Software</item>
+    </string-array>
+</resources>
