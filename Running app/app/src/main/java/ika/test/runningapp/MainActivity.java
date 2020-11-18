@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ika.test.runningapp.calories.CaloriesFragment;
 import ika.test.runningapp.databinding.ActivityMainBinding;
+import ika.test.runningapp.routes.RouteBrowseFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,8 +20,10 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
 
     private CaloriesFragment caloriesFragment;
+    private RouteBrowseFragment routeBrowseFragment;
 
     private static final String CALORIES_TAG = "fragment-calories-tag";
+    private static final String ROUTE_BROWSE_TAG = "route-browse-tag";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,21 +37,38 @@ public class MainActivity extends AppCompatActivity {
 
         if(fragmentManager.getFragments().size()==0){
             caloriesFragment = new CaloriesFragment();
+            routeBrowseFragment = new RouteBrowseFragment();
             fragmentManager
                     .beginTransaction()
+                    .add(R.id.frame_layout, routeBrowseFragment, ROUTE_BROWSE_TAG)
                     .add(R.id.frame_layout, caloriesFragment, CALORIES_TAG)
+                    .hide(caloriesFragment)
+                    .show(routeBrowseFragment)
                     .commit();
         }else{
             caloriesFragment =(CaloriesFragment) fragmentManager.findFragmentByTag(CALORIES_TAG);
+            routeBrowseFragment = (RouteBrowseFragment) fragmentManager.findFragmentByTag(ROUTE_BROWSE_TAG);
         }
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.menu_item_calories:
-                        return true;
                     case  R.id.menu_item_routes:
+                        fragmentManager
+                                .beginTransaction()
+                                //.replace(R.id.frame_layout, routeBrowseFragment, ROUTE_BROWSE_TAG)
+                                .show(routeBrowseFragment)
+                                .hide(caloriesFragment)
+                                .commit();
+                        return true;
+                    case R.id.menu_item_calories:
+                        fragmentManager
+                                .beginTransaction()
+                                //.replace(R.id.frame_layout, caloriesFragment, CALORIES_TAG)
+                                .hide(routeBrowseFragment)
+                                .show(caloriesFragment)
+                                .commit();
                         return true;
                     case R.id.menu_item_settings:
                         return true;

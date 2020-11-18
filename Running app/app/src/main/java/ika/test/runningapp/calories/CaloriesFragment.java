@@ -12,8 +12,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import ika.test.runningapp.LifeCycleAwareLogger;
 import ika.test.runningapp.MainActivity;
-import ika.test.runningapp.MyLifeCycleAwareComponent;
 import ika.test.runningapp.R;
 import ika.test.runningapp.databinding.FragmentCaloriesBinding;
 
@@ -23,7 +23,7 @@ public class CaloriesFragment extends Fragment {
     private CaloriesViewModel caloriesViewModel;
 
     public CaloriesFragment() {
-        // Required empty public constructor
+        getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "CaloriesFragment "));
     }
 
     @Override
@@ -32,11 +32,11 @@ public class CaloriesFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentCaloriesBinding.inflate(inflater, container, false);
 
-        getLifecycle().addObserver(new MyLifeCycleAwareComponent(log_tag, lifeCycleOwner));
+        getLifecycle().addObserver(new LifeCycleAwareLogger("lifeCycleLogger", "MainActivity"));
 
         MainActivity parentActivity = (MainActivity) getActivity();
 
-        caloriesViewModel = new ViewModelProvider(this).get(CaloriesViewModel.class);
+        caloriesViewModel = new ViewModelProvider(parentActivity).get(CaloriesViewModel.class);
 
         caloriesViewModel.initByBundle(savedInstanceState);
 
