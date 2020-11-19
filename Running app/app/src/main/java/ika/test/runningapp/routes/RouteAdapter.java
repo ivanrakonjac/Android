@@ -1,23 +1,26 @@
 package ika.test.runningapp.routes;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.databinding.ViewHolderRouteBinding;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder> {
 
-    private final List<Route> routes;
+    private final RouteViewModel routeViewModel;
+    private final MainActivity mainActivity;
 
-    public RouteAdapter(List<Route> routes){
-        this.routes = routes;
+    public RouteAdapter(MainActivity mainActivity){
+        this.mainActivity = mainActivity;
+        this.routeViewModel = new ViewModelProvider(this.mainActivity).get(RouteViewModel.class);
     }
 
     @NonNull
@@ -32,18 +35,18 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     public void onBindViewHolder(@NonNull RouteViewHolder holder, int position) {
         ViewHolderRouteBinding binding = holder.binding;
 
-        Route route = routes.get(position);
+        Route route = routeViewModel.getRoutes().get(position);
 
         binding.routImage.setImageDrawable(route.getImage());
-        binding.routName.setText(routes.get(position).getName());
-        binding.routLabel.setText(routes.get(position).getLabel());
-        binding.routDuzina.setText(routes.get(position).getLength() + "");
-        binding.routTezina.setText(routes.get(position).getDifficulty());
+        binding.routName.setText(route.getName());
+        binding.routLabel.setText(route.getLabel());
+        binding.routDuzina.setText(route.getLength() + "");
+        binding.routTezina.setText(route.getDifficulty());
     }
 
     @Override
     public int getItemCount() {
-        return routes.size();
+        return routeViewModel.getRoutes().size();
     }
 
     public class RouteViewHolder extends RecyclerView.ViewHolder{
@@ -53,6 +56,15 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
         public RouteViewHolder(@NonNull ViewHolderRouteBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+
+            binding.opisButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int routeIndex = getAdapterPosition();
+                    routeViewModel.setSelectedRoute(routeViewModel.getRoutes().get(routeIndex));
+                }
+            });
+
         }
     }
 }

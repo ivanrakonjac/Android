@@ -11,4 +11,7 @@
     <string name="main_navigation_label_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="main_navigation_label_news">News</string>
+    <string name="action_1">Vise</string>
+    <string name="action_2">Opis</string>
 </resources>

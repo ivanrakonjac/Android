@@ -3,6 +3,7 @@ package ika.test.runningapp.routes;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -14,12 +15,12 @@ import java.util.List;
 
 import ika.test.runningapp.LifeCycleAwareLogger;
 import ika.test.runningapp.MainActivity;
-import ika.test.runningapp.R;
 import ika.test.runningapp.databinding.FragmentRouteBrowseBinding;
 
 public class RouteBrowseFragment extends Fragment {
 
     private FragmentRouteBrowseBinding binding;
+    private RouteViewModel routeViewModel;
 
     public RouteBrowseFragment() {
         getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "RouteBrowseFragment"));
@@ -32,15 +33,12 @@ public class RouteBrowseFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentRouteBrowseBinding.inflate(inflater, container, false);
 
-        MainActivity parentActivity = (MainActivity) getActivity();
+        MainActivity parentActivity = (MainActivity) getParentFragment().getActivity();
 
-        List<Route> routes = new ArrayList<>();
-        for (int i = 0; i < 9; i++){
-            routes.add(Route.createFromResources(getResources(), i));
-        }
+        routeViewModel = new ViewModelProvider(parentActivity).get(RouteViewModel.class);
 
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setAdapter(new RouteAdapter(routes));
+        binding.recyclerView.setAdapter(new RouteAdapter(parentActivity));
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
 
         return binding.getRoot();
