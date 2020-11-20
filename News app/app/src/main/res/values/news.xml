@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="news_titles">
+        <item>Mađarska kupuje raketni sistem PVO NASAMS</item>
+        <item>Grčka zvanično zatražila od SAD da joj prodaju borbene avione F-35</item>
+        <item>Nigerija novi korisnik kineske bespilotne letelice Wing Loong II</item>
+        <item>Rumunija zadržava u upotrebi lovce MiG-21 LanceR</item>
+        <item>Američki borbeni avioni F-16</item>
+    </string-array>
+
+    <string-array name="news_text">
+        <item>
+            Za potrebe svojih oružanih snaga Mađarska od norveške kompanije Kongberg i američke Raytheon nabavlja raketne sisteme PVO NASAMS, objavio je juče sekretarijat komesara Vlade Mađarske zaduženog za razvoj odbrane.
+            Raspoređivanjem najsavremenijih zemaljskih sistema PVO kratkog i srednjeg dometa, oružane snage će povratiti svoje odbrambene sposobnosti koje su bile izgubljene i koje će sada biti na nivou 21. veka, saopštilo je mađarsko ministarstva odbrane. U poređenju sa sovjetskim sistemima Kub koji su u službi od 1976. godine i koje treba zameniti, nova oprema će višestruko povećati veličinu branjenog područija i broj ciljeva koji se istovremeno mogu uništiti, tj. višestruko će biti uvećane mogućnosti vođenja protivvazduhoplovne borbe.
+            Pored toga, NASAMS može da se bori protiv vazdušnih udara koje se vrše dronovima i borbenim bespilotnim letelicama, domaća PVO do sada ili nije imala mogućnosti ili su takve sposobnosti bile vrlo ograničene, naglašeno je iz ministarstva odbrane Mađarske.
+            Savremeni, zemaljski raketni sistemi PVO, koje će vojska dobiti počevši od 2023. godine, imaće ključnu ulogu u zaštiti mađarskog vazdušnog prostora. Ovo je istorijski korak, pošto mađarska PVO nije doživela takav razvoj već oko četiri decenije. Odabrali smo NASAMS kao najprikladnije rešenje koje je široko rasprostranjeno u NATO, zadovoljava zahteve SAD a koristi se i za zaštitu američke prestonice – izjavio je Maróth Gáspár, vladin komesar odgovoran za razvoj odbrane.
+            Prve naznake da je Mađarska odabrala raketni sistem PVO NASAMS za zamenu sovjetskih Kubova, pojavile su se početkom maja ove godine kada je Agencija za saradnju iz oblasti bezbednosti i odbrane DSCA (Defense Security Cooperation Agency) američkog Ministarstva odbrane dostavila obaveštenje američkom Kongresu o mogućoj prodaji raketa zemlja-vazduh AMRAAM i AMRAAM-ER Mađarskoj.
+            Američki Stejt Department je potom odobrio ovaj potencijalni posao u kome bi Mađarska između ostalog nabavila 60 raketa AIM-120C-7 i C-8 a u obaveštenju se napominje da je ova prodaja podrška mađarskoj nabavci raketnog sistema PVO NASAMS (National/Norwegian Advanced Surface to Air Missile System). Pošto je naglašeno da je osim raketa AMRAAM moguća prodaja i raketa AMRAAM-ER čiji je do sada jedini kupac bio Katar, Mađarska bi bila tek drugi korisnik ovih raketa.
+        </item>
+        <item>
+            Internet izdanje grčkog nedeljnika Proto Thema prenelo je informaciju da je Grčka zvanično zatražila od SAD da nabavi 18 do 24 višenamenhskih borbenih aviona 5. generacije F-35. Kako je navedeno, Ministarstvo nacionalne odbrane poslalo je 6. novembra “Pismo o zahtevu“ (LOR – Letter of Request) američkom Ministarstvu odbrane a pismo je potpisao generalni direktor za naoružanje i investicije Teodoros Lagios.
+            U pismu čiji je deo teksta objavljen na stranici grčkog nedeljnika, navodi se da će se odluka o ulasku Grčke u program Joint Strike Fighter zasnivati na različitim faktorima kao što su program isporuke lovaca, plan otplate, konfiguracija letelica i moguća kombinacija da se nabavi ukupno 18 do 24 aviona a u obzir dolaze novoproizvedeni i, ako su dostupni, avioni koje je koristilo RV SAD. Takođe u dokumentu se potvrđuje da je grčka vlada već dobila podatke o dostupnosti i cenama aviona u SAD koji su raspoloživi za prodaju Grčkoj.
+            Iz grčkog ministarstva odbrane je naglašeno da će oni biti zahvalni ukoliko američka strana odgovori u najkraćem mogućem roku i da je zbog unutrašnjih fiskalnih aranžmana i drugih važećih pravila u okviru budžeta i deficita EU, presudno je da se prvi F-35 isporuče u 2021. godini. Teodoros Lagios pozvao je nadležne američke zvaničnike da posete Grčku što je pre moguće kako bi započeli razgovori o nabavci aviona.
+        </item>
+        <item>
+            Šef odeljenja za odnose sa javnošću nigerijskog Ratnog vazduhoplovstva, brigadni general Ibikunle Daramola objavio je 10. novembra na svom Tviter profilu da je Nigerija za potrebe svojih vojnih vazduhoplovnih snaga nabavila dve kineske izviđačko-borbene bespilotne letelice Wing Loong II.
+            Nigerijski zvaničnik naveo je da se njegova zemlja pridružila Kini i Ujedinjenim Arapskim Emiratima kao jedinim korisnicima ovog tipa bespilotne letelice. On je dodao da Wing Loong II može ostati u vazduhu 31 sat kada je u pitanju izvršavanje zadataka prikupljanja obaveštajnih podataka, nadzora i izviđanja (ISR) i 26 sati prilikom borbenih misija, i da će ove letelice imati značajnu vrednost u operacijama protiv pobunjenika i bandita.
+        </item>
+        <item>
+            Rumunija će zadržati u upotrebi avion MiG-21 LanceR budući da „pruža sposobnosti potrebne da se pokrije ceo spektar delovanja rumunskog ratnog vazduhoplovstva“ izjavio je ministar odbrane ove zemlje Nikole Ciuca (Nicolae Ciucă) na nedavno održanoj konferenciji za medije u Bukureštu.
+            Flota aviona ovog tipa, odnosno 26 modernizovanih y Elbitu (20 jednoseda MiG-21MF/MF-75 LanceR-C i 6 dvoseda MiG-21UM LanceR-B) trenutno su podeljeni između 711. lovačke eskadrile u bazi Kampia Turzi (Câmpia Turzii) i 861. lovačke eskadrile iz baze Fetešti-Borcea (Feteşti-Borcea).
+        </item>
+        <item>
+            Dvodnevna zajednička vojna vežba oružanih snaga Bosne i Hercegovine i SAD pod nazivom “Bilateralna vježba“ počela je 18. novembra.
+            Cilj vežbe je unapređenje partnerske saradnje između vojski dve države, razvijanja sposobnosti sadejstva i spremnosti, kao i stvaranja preduslova za uvođenje novih sposobnosti Oružanih snaga Bosne i Hercegovine (OSBiH), saopštilo je ministarstvo odbrane BiH.
+        </item>
+    </string-array>
+
+    <array name="news_images">
+        <item>@drawable/madjarska</item>
+        <item>@drawable/grcka</item>
+        <item>@drawable/nigerija</item>
+        <item>@drawable/rumunija</item>
+        <item>@drawable/amerika</item>
+    </array>
+
+</resources>
