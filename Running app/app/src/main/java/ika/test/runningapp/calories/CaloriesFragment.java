@@ -38,9 +38,7 @@ public class CaloriesFragment extends Fragment {
 
         caloriesViewModel = new ViewModelProvider(parentActivity).get(CaloriesViewModel.class);
 
-        caloriesViewModel.initByBundle(savedInstanceState);
-
-        caloriesViewModel.getCaloriesBurned().observe(this, new Observer<Integer>() {
+        caloriesViewModel.getCaloriesBurned().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer caloriesBurned) {
                 if(caloriesBurned != -1){
@@ -49,7 +47,7 @@ public class CaloriesFragment extends Fragment {
             }
         });
 
-        caloriesViewModel.getCaloriesNeeded().observe(this, new Observer<Integer>() {
+        caloriesViewModel.getCaloriesNeeded().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer caloriesNeeded) {
                 if(caloriesNeeded != -1){
