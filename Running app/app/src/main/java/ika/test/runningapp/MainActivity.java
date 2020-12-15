@@ -53,10 +53,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case  R.id.menu_item_routes:
-                        navController.navigate(R.id.routeBrowseFragment);
+                        switch (navController.getCurrentDestination().getId()){
+                            case R.id.caloriesFragment:
+                                navController.navigate(R.id.action_caloriesFragment_pop);
+                                break;
+                            default:
+                                //Do nothing
+                                break;
+                        }
                         return true;
                     case R.id.menu_item_calories:
-                        navController.navigate(R.id.caloriesFragment);
+                        switch (navController.getCurrentDestination().getId()){
+                            case R.id.routeBrowseFragment:
+                            case R.id.routeDetailsFragment:
+                                navController.navigate(R.id.action_global_caloriesFragment);
+                                break;
+                            default:
+                                //Do nothing
+                                break;
+                        }
                         return true;
                     case R.id.menu_item_settings:
                         return true;
@@ -68,9 +83,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if(bottomNavigationView.getSelectedItemId() == R.id.menu_item_routes){
-            routeViewModel.setSelectedRoute(null);
-            //return;
+
+        switch (navController.getCurrentDestination().getId()){
+            case R.id.routeDetailsFragment:
+                routeViewModel.setSelectedRoute(null);
+                break;
         }
         super.onBackPressed();
     }

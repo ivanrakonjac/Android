@@ -56,7 +56,7 @@ public class RouteBrowseFragment extends Fragment {
             public void onChanged(Route route) {
                 if(route!=null){
                     // Da bi mogli da dohvatimo detailsFragment
-                    navController.navigate(R.id.routeDetailsFragment);
+                    navController.navigate(R.id.action_show_routeDetails);
                 }
             }
         });
