@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -25,18 +27,24 @@ public class MainActivity extends AppCompatActivity {
     private RouteViewModel routeViewModel;
 
     private BottomNavigationView bottomNavigationView;
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        //binding = ActivityMainBinding.inflate(getLayoutInflater());
         //setContentView(binding.getRoot());
 
         routeViewModel = new ViewModelProvider(this).get(RouteViewModel.class);
 
         fragmentManager = getSupportFragmentManager();
+
+        //Dohvatamo NavHostFragment pomocu fragmentManagera, da bi dohvatili NavController
+        NavHostFragment navHostFragment = (NavHostFragment)fragmentManager.findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+
 
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation_view);
 
@@ -45,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case  R.id.menu_item_routes:
-
+                        navController.navigate(R.id.routeBrowseFragment);
                         return true;
                     case R.id.menu_item_calories:
-
+                        navController.navigate(R.id.caloriesFragment);
                         return true;
                     case R.id.menu_item_settings:
                         return true;

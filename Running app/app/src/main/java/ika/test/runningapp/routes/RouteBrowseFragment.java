@@ -2,9 +2,13 @@ package ika.test.runningapp.routes;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -23,6 +27,8 @@ public class RouteBrowseFragment extends Fragment {
 
     private FragmentRouteBrowseBinding binding;
     private RouteViewModel routeViewModel;
+
+    private NavController navController;
 
     public RouteBrowseFragment() {
         getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "RouteBrowseFragment"));
@@ -49,6 +55,8 @@ public class RouteBrowseFragment extends Fragment {
             @Override
             public void onChanged(Route route) {
                 if(route!=null){
+                    // Da bi mogli da dohvatimo detailsFragment
+                    navController.navigate(R.id.routeDetailsFragment);
                 }
             }
         });
@@ -60,5 +68,13 @@ public class RouteBrowseFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Dohvatamo NavController da bi mogli da odemo na details o nekoj ruti
+        // Radimo to u ovoj metodi, a ne u onCreate, jer se view pravi posle fragmenta
+        navController = Navigation.findNavController(view);
     }
 }
