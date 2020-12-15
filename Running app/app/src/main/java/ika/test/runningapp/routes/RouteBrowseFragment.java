@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -56,7 +57,8 @@ public class RouteBrowseFragment extends Fragment {
             public void onChanged(Route route) {
                 if(route!=null){
                     // Da bi mogli da dohvatimo detailsFragment
-                    navController.navigate(R.id.action_show_routeDetails);
+                    NavDirections action = RouteBrowseFragmentDirections.actionShowRouteDetails();
+                    navController.navigate(action);
                 }
             }
         });
