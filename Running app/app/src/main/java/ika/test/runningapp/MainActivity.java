@@ -3,12 +3,9 @@ package ika.test.runningapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
 import androidx.navigation.NavDirections;
-import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
@@ -16,14 +13,13 @@ import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import ika.test.runningapp.calories.CaloriesFragment;
 import ika.test.runningapp.calories.CaloriesFragmentDirections;
 import ika.test.runningapp.databinding.ActivityMainBinding;
-import ika.test.runningapp.routes.RouteBrowseFragment;
-import ika.test.runningapp.routes.RouteFragment;
 import ika.test.runningapp.routes.RouteViewModel;
 
 public class MainActivity extends AppCompatActivity {
+
+    public final static String LOG_TAG = "fragmentExample";
 
     private ActivityMainBinding binding;
     private FragmentManager fragmentManager;

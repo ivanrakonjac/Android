@@ -28,23 +28,21 @@ public class RouteBrowseFragment extends Fragment {
 
     private FragmentRouteBrowseBinding binding;
     private RouteViewModel routeViewModel;
-
     private NavController navController;
+    private MainActivity mainActivity;
 
     public RouteBrowseFragment() {
-        getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "RouteBrowseFragment"));
+        //getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "RouteBrowseFragment"));
     }
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        binding = FragmentRouteBrowseBinding.inflate(inflater, container, false);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        MainActivity parentActivity = (MainActivity) getActivity();
+        //Izmestili smo ove stvari ovde, da se ne bi generisale svaki put kada se pravi View
 
-        routeViewModel = new ViewModelProvider(parentActivity).get(RouteViewModel.class);
+        mainActivity = (MainActivity) requireActivity();
+        routeViewModel = new ViewModelProvider(mainActivity).get(RouteViewModel.class);
 
         List<Route> routes = new ArrayList<>();
         for (int i = 0; i < 9; i++){
@@ -52,8 +50,21 @@ public class RouteBrowseFragment extends Fragment {
         }
         routeViewModel.setRoutes(routes);
 
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        binding = FragmentRouteBrowseBinding.inflate(inflater, container, false);
+
+        getViewLifecycleOwner().getLifecycle().addObserver( new LifeCycleAwareLogger(
+                MainActivity.LOG_TAG,
+                RouteBrowseFragment.class.getSimpleName() + "View"
+        ));
+
         RouteAdapter routeAdapter = new RouteAdapter(
-                parentActivity,
+                mainActivity,
                 routeIndex -> {
                     RouteBrowseFragmentDirections.ActionShowRouteDetails action = RouteBrowseFragmentDirections.actionShowRouteDetails();
                     action.setRouteIndex(routeIndex);
@@ -62,7 +73,7 @@ public class RouteBrowseFragment extends Fragment {
         );
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setAdapter(routeAdapter);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
 
         return binding.getRoot();
     }

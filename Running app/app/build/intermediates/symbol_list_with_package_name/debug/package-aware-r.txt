@@ -1811,7 +1811,6 @@ id flip
 id floating
 id forever
 id fragment_container_view_tag
-id fragment_frame_layout
 id ghost_view
 id ghost_view_holder
 id gone
@@ -2140,7 +2139,6 @@ layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout fragment_calories
-layout fragment_route
 layout fragment_route_browse
 layout fragment_route_details
 layout mtrl_alert_dialog

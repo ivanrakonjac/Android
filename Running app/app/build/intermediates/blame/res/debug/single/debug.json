@@ -1,31 +1,27 @@
 [
     {
-        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\layout_fragment_route.xml.flat",
-        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\layout\\fragment_route.xml"
-    },
-    {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_launcher_background.xml.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\drawable\\ic_launcher_background.xml"
-    },
-    {
-        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_baseline_terrain_24.xml.flat",
-        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\drawable\\baseline_terrain_24.xml"
     },
     {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
     },
     {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\drawable_baseline_terrain_24.xml.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\drawable\\baseline_terrain_24.xml"
+    },
+    {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
-        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher_round.xml"
     },
     {
         "merged": "C:\\Users\\Ika\\Documents\\Programiranje\\Android\\RunningApp\\app\\build\\intermediates\\res\\merged\\debug\\navigation_nav_graph.xml.flat",
