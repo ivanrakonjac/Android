@@ -1,37 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calories.CaloriesFragment">
+>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".calories.CaloriesFragment"
+    android:orientation="vertical">
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/weight"
         android:hint="@string/tezina"
         style="@style/MaterialEditTextConstrain"
-        app:suffixText="kg"
-
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/height"
-        app:layout_constraintTop_toTopOf="parent">
+        app:suffixText="kg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/weightEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"/>
+            android:inputType="number" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/height"
         android:hint="@string/visina"
         style="@style/MaterialEditTextConstrain"
-        app:suffixText="cm"
-
-        app:layout_constraintLeft_toRightOf="@id/weight"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBaseline_toBaselineOf="@id/weight">
+        app:suffixText="cm">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/heightEditText"
@@ -41,13 +46,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/age"
         style="@style/MaterialEditTextConstrain"
         android:hint="@string/godine"
         app:layout_constraintLeft_toLeftOf="parent"
-
-        app:layout_constraintRight_toLeftOf="@id/sex"
-        app:layout_constraintTop_toBottomOf="@id/weight"
         app:suffixText="god">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -58,11 +62,10 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/sex"
-        style="@style/MaterialEditTextConstrain"
-        app:layout_constraintTop_toBottomOf="@id/height"
-        app:layout_constraintLeft_toRightOf="@id/age"
-        app:layout_constraintRight_toRightOf="parent">
+        style="@style/MaterialEditTextConstrain">
 
         <RadioButton
             android:id="@+id/male"
@@ -81,15 +84,12 @@
     </RadioGroup>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/duration"
         style="@style/MaterialEditTextConstrain"
         android:layout_marginStart="106dp"
-
-
         android:hint="@string/duration"
-        app:layout_constraintEnd_toEndOf="@+id/age"
-        app:layout_constraintStart_toStartOf="@+id/age"
-        app:layout_constraintTop_toBottomOf="@id/age"
         app:suffixText="min">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -100,46 +100,34 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/spinner"
         style="@style/MaterialSpinnerTextConstrain"
-        app:layout_constraintLeft_toRightOf="@id/duration"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sex"
-        app:layout_constraintBottom_toBottomOf="@id/duration">
-
+        tools:listitem="@android:layout/simple_dropdown_item_1line">
     </Spinner>
 
+    <Button
+        android:id="@+id/izracunaj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="IZRACUNAJ" />
 
     <TextView
         android:id="@+id/rezultat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_margin="15dp"
         android:text="Potroseno je: "
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/duration"/>
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/rezultatPotrebnoKalorija"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_margin="15dp"
         android:text="Potrebno je: "
-        android:gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rezultat"/>
+        android:gravity="center"/>
 
-    <Button
-        android:id="@+id/izracunaj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="IZRACUNAJ"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/rezultatPotrebnoKalorija"/>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
+</ScrollView>
