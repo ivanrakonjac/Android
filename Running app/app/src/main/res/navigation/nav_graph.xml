@@ -8,7 +8,11 @@
         android:id="@+id/routeBrowseFragment"
         android:name="ika.test.runningapp.routes.RouteBrowseFragment"
         android:label="fragment_route_browse"
-        tools:layout="@layout/fragment_route_browse" />
+        tools:layout="@layout/fragment_route_browse" >
+        <action
+            android:id="@+id/action_show_routeDetails"
+            app:destination="@id/routeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/routeDetailsFragment"
         android:name="ika.test.runningapp.routes.RouteDetailsFragment"
@@ -18,5 +22,14 @@
         android:id="@+id/caloriesFragment"
         android:name="ika.test.runningapp.calories.CaloriesFragment"
         android:label="fragment_calories"
-        tools:layout="@layout/fragment_calories" />
+        tools:layout="@layout/fragment_calories" >
+        <action
+            android:id="@+id/action_caloriesFragment_pop"
+            app:popUpTo="@id/caloriesFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_caloriesFragment"
+        app:destination="@id/caloriesFragment" />
 </navigation>
