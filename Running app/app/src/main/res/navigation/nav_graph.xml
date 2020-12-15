@@ -17,7 +17,15 @@
         android:id="@+id/routeDetailsFragment"
         android:name="ika.test.runningapp.routes.RouteDetailsFragment"
         android:label="RouteDetailsFragment"
-        tools:layout="@layout/fragment_route_details" />
+        tools:layout="@layout/fragment_route_details">
+
+        <argument
+            android:name="routeIndex"
+            android:defaultValue="0"
+            app:argType="integer"/>
+
+    </fragment>
+
     <fragment
         android:id="@+id/caloriesFragment"
         android:name="ika.test.runningapp.calories.CaloriesFragment"

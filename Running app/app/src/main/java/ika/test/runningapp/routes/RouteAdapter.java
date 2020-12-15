@@ -15,12 +15,19 @@ import ika.test.runningapp.databinding.ViewHolderRouteBinding;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder> {
 
+    public interface Callback<T> {
+        void invoke(T parameter);
+    }
+
     private final RouteViewModel routeViewModel;
     private final MainActivity mainActivity;
 
-    public RouteAdapter(MainActivity mainActivity){
+    private final Callback<Integer> callback;
+
+    public RouteAdapter(MainActivity mainActivity, Callback<Integer> callback){
         this.mainActivity = mainActivity;
         this.routeViewModel = new ViewModelProvider(this.mainActivity).get(RouteViewModel.class);
+        this.callback = callback;
     }
 
     @NonNull
@@ -61,7 +68,8 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
                 @Override
                 public void onClick(View v) {
                     int routeIndex = getAdapterPosition();
-                    routeViewModel.setSelectedRoute(routeViewModel.getRoutes().get(routeIndex));
+                    //routeViewModel.setSelectedRoute(routeViewModel.getRoutes().get(routeIndex));
+                    callback.invoke(routeIndex);
                 }
             });
 

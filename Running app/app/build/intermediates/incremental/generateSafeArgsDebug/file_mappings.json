@@ -1,0 +1,1 @@
+[{"navFile":"src\\main\\res\\navigation\\nav_graph.xml","javaFiles":["ika.test.runningapp.NavGraphDirections","ika.test.runningapp.routes.RouteBrowseFragmentDirections","ika.test.runningapp.routes.RouteDetailsFragmentDirections","ika.test.runningapp.routes.RouteDetailsFragmentArgs","ika.test.runningapp.calories.CaloriesFragmentDirections"]}]

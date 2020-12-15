@@ -52,21 +52,16 @@ public class RouteBrowseFragment extends Fragment {
         }
         routeViewModel.setRoutes(routes);
 
-        routeViewModel.getSelectedRoute().observe(getViewLifecycleOwner(), new Observer<Route>() {
-            @Override
-            public void onChanged(Route route) {
-                if(route!=null){
-                    // Da bi mogli da dohvatimo detailsFragment
-                    NavDirections action = RouteBrowseFragmentDirections.actionShowRouteDetails();
+        RouteAdapter routeAdapter = new RouteAdapter(
+                parentActivity,
+                routeIndex -> {
+                    RouteBrowseFragmentDirections.ActionShowRouteDetails action = RouteBrowseFragmentDirections.actionShowRouteDetails();
+                    action.setRouteIndex(routeIndex);
                     navController.navigate(action);
                 }
-            }
-        });
-
-        routeViewModel = new ViewModelProvider(parentActivity).get(RouteViewModel.class);
-
+        );
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.setAdapter(new RouteAdapter(parentActivity));
+        binding.recyclerView.setAdapter(routeAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
 
         return binding.getRoot();
