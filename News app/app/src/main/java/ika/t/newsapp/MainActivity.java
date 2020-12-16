@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.res.Configuration;
@@ -21,9 +22,12 @@ import ika.t.newsapp.databinding.ActivityMainBinding;
 import ika.t.newsapp.news.EmptyFragment;
 import ika.t.newsapp.news.News;
 import ika.t.newsapp.news.NewsDetailsFragment;
+import ika.t.newsapp.news.NewsDetailsFragmentDirections;
 import ika.t.newsapp.news.NewsFragment;
+import ika.t.newsapp.news.NewsFragmentDirections;
 import ika.t.newsapp.news.NewsViewModel;
 import ika.t.newsapp.news.SaobracajFragment;
+import ika.t.newsapp.news.SaobracajFragmentDirections;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
 
     private SaobracajFragment saobracajFragment;
     private String SAOBRACAJ_FRAGMENT_STRING = "SAOBRACAJ_FRAGMENT";
+
+    private BottomNavigationView bottomMenu;
 
     private NavController navController;
 
@@ -66,11 +72,12 @@ public class MainActivity extends AppCompatActivity {
         newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
             @Override
             public void onChanged(News selectedNews) {
-                navController.navigate(R.id.action_newsFragment_to_newsDetailsFragment);
+                NavDirections action = NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment();
+                navController.navigate(action);
             }
         });
 
-        BottomNavigationView bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+        bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
 
         bottomMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -79,7 +86,8 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_item_politika:
                         switch (navController.getCurrentDestination().getId()){
                             case R.id.saobracajFragment:
-                                navController.navigate(R.id.action_saobracajFragment_pop);
+                                NavDirections action = SaobracajFragmentDirections.actionSaobracajFragmentPop();
+                                navController.navigate(action);
                                 break;
                             default:
                                 //Do nothing
@@ -90,7 +98,8 @@ public class MainActivity extends AppCompatActivity {
                         switch (navController.getCurrentDestination().getId()){
                             case R.id.newsFragment:
                             case R.id.newsDetailsFragment:
-                                navController.navigate(R.id.action_global_saobracajFragment);
+                                NavDirections action = NavGraphDirections.actionGlobalSaobracajFragment();
+                                navController.navigate(action);
                                 break;
                             default:
                                 //Do nothing
@@ -124,5 +133,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        switch (navController.getCurrentDestination().getId()){
+            case R.id.saobracajFragment:
+                bottomMenu.getMenu().getItem(0).setChecked(true);
+        }
+        super.onBackPressed();
+    }
 }
