@@ -1,5 +1,6 @@
 package ika.t.newsapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
@@ -11,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ika.t.newsapp.databinding.ActivityMainBinding;
 import ika.t.newsapp.news.EmptyFragment;
@@ -92,6 +95,23 @@ public class MainActivity extends AppCompatActivity {
                 emptyFragment = (EmptyFragment) fragmentManager.findFragmentByTag(NEWS_EMPTY_FRAGMENT_STRING);
             }
         }
+
+        binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem selectedItem) {
+                switch (selectedItem.getItemId()){
+                    case R.id.menu_item_politika:
+                        Toast.makeText(getBaseContext(), "Politika", Toast.LENGTH_SHORT).show();
+                        return true;
+                    case R.id.menu_item_sport:
+                        Toast.makeText(getBaseContext(), "Sport", Toast.LENGTH_SHORT).show();
+                        return true;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
 
     }
 

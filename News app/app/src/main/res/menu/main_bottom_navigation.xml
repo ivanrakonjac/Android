@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_item_routes"
+        android:id="@+id/menu_item_politika"
         android:icon="@drawable/baseline_account_balance_24"
         android:title="Politika"/>
 
     <item
-        android:id="@+id/menu_item_calories"
+        android:id="@+id/menu_item_sport"
         android:icon="@drawable/baseline_commute_24"
         android:title="Saobracaj"/>
 </menu>
