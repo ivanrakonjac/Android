@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomMenu;
 
-    private NavController navController;
+    private static NavController navController;
+
+    public static NavController getNavController(){
+        return navController;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
 
-        newsFragment = new NewsFragment();
-        saobracajFragment = new SaobracajFragment();
+
 
         /*fragmentManager
                 .beginTransaction()
@@ -69,13 +72,14 @@ public class MainActivity extends AppCompatActivity {
         final NavHostFragment navHost = (NavHostFragment) fragmentManager.findFragmentById(R.id.nav_host_fragment);
         navController = navHost.getNavController();
 
-        newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
+        /*newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
             @Override
             public void onChanged(News selectedNews) {
-                NavDirections action = NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment();
+                NewsFragmentDirections.ActionNewsFragmentToNewsDetailsFragment action = NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment();
+                action.setRouteIndex(0);
                 navController.navigate(action);
             }
-        });
+        });*/
 
         bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
 

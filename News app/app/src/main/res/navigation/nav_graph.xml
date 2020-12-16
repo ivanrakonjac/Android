@@ -36,5 +36,10 @@
         android:id="@+id/newsDetailsFragment"
         android:name="ika.t.newsapp.news.NewsDetailsFragment"
         android:label="fragment_news_details"
-        tools:layout="@layout/fragment_news_details" />
+        tools:layout="@layout/fragment_news_details" >
+        <argument
+            android:name="newsIndex"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 </navigation>

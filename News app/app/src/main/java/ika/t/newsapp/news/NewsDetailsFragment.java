@@ -31,14 +31,12 @@ public class NewsDetailsFragment extends Fragment {
         MainActivity parentActivity = (MainActivity) getActivity();
         newsViewModel = new ViewModelProvider(parentActivity).get(NewsViewModel.class);
 
-        newsViewModel.getSelectedNews().observe(getViewLifecycleOwner(), new Observer<News>() {
-            @Override
-            public void onChanged(News selectedNews) {
-                binding.newsImage.setImageDrawable(selectedNews.getImage());
-                binding.newsTitle.setText(selectedNews.getTitle());
-                binding.newsText.setText(selectedNews.getText());
-            }
-        });
+        int selectedNewsIndex = NewsDetailsFragmentArgs.fromBundle(requireArguments()).getNewsIndex();
+        News selectedNews = newsViewModel.getNewsList().get(selectedNewsIndex);
+
+        binding.newsImage.setImageDrawable(selectedNews.getImage());
+        binding.newsTitle.setText(selectedNews.getTitle());
+        binding.newsText.setText(selectedNews.getText());
 
         return binding.getRoot();
     }

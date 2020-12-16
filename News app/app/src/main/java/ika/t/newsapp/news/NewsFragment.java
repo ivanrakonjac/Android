@@ -47,8 +47,17 @@ public class NewsFragment extends Fragment {
         }
         newsViewModel.setNewsList(newsList);
 
+        NewsAdapter newsAdapter = new NewsAdapter(
+                parentActivity,
+                newsIndex -> {
+                    NewsFragmentDirections.ActionNewsFragmentToNewsDetailsFragment action = NewsFragmentDirections.actionNewsFragmentToNewsDetailsFragment();
+                    action.setNewsIndex(newsIndex);
+                    MainActivity.getNavController().navigate(action);
+                }
+        );
+
         binding.newsRecyclerView.setHasFixedSize(true);
-        binding.newsRecyclerView.setAdapter(new NewsAdapter(parentActivity));
+        binding.newsRecyclerView.setAdapter(newsAdapter);
         binding.newsRecyclerView.setLayoutManager(new LinearLayoutManager(parentActivity));
 
         return binding.getRoot();

@@ -14,12 +14,18 @@ import ika.t.newsapp.databinding.NewsLayoutBinding;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder> {
 
+    public interface Callback<T>{
+        void invoke(T parameter);
+    }
+
     private final MainActivity mainActivity;
     private final NewsViewModel newsViewModel;
+    private final Callback<Integer> callback;
 
-    public NewsAdapter(MainActivity mainActivity) {
+    public NewsAdapter(MainActivity mainActivity, Callback<Integer> callback) {
         this.mainActivity = mainActivity;
         this.newsViewModel = new ViewModelProvider(mainActivity).get(NewsViewModel.class);
+        this.callback = callback;
     }
 
 
@@ -55,7 +61,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsViewHolder
                 @Override
                 public void onClick(View v) {
                     int selectedNewsIndex = getAbsoluteAdapterPosition();
-                    newsViewModel.setSelectedNews(newsViewModel.getNewsList().get(selectedNewsIndex));
+                    callback.invoke(selectedNewsIndex);
                 }
             });
 
