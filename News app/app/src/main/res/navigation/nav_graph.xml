@@ -22,13 +22,16 @@
         android:name="ika.t.newsapp.news.SaobracajFragment"
         android:label="fragment_saobracaj"
         tools:layout="@layout/fragment_saobracaj" >
+
         <action
             android:id="@+id/action_saobracajFragment_pop"
             app:popUpTo="@id/saobracajFragment"
             app:popUpToInclusive="true" />
+
     </fragment>
 
     <action android:id="@+id/action_global_saobracajFragment" app:destination="@id/saobracajFragment" />
+
     <fragment
         android:id="@+id/newsDetailsFragment"
         android:name="ika.t.newsapp.news.NewsDetailsFragment"

@@ -6,7 +6,7 @@
         android:title="Politika"/>
 
     <item
-        android:id="@+id/menu_item_sport"
+        android:id="@+id/menu_item_saobracaj"
         android:icon="@drawable/baseline_commute_24"
         android:title="Saobracaj"/>
 </menu>

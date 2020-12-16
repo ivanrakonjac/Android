@@ -66,36 +66,9 @@ public class MainActivity extends AppCompatActivity {
         newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
             @Override
             public void onChanged(News selectedNews) {
-                navController.navigate(R.id.newsDetailsFragment);
+                navController.navigate(R.id.action_newsFragment_to_newsDetailsFragment);
             }
         });
-
-
-        /*if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-            if (fragmentManager.getFragments().size() == 0) {
-                newsFragment = new NewsFragment();
-                fragmentManager
-                        .beginTransaction()
-                        .add(R.id.main_frame_layout, newsFragment, NEWS_FRAGMENT_STRING)
-                        .commit();
-            } else {
-                newsFragment = (NewsFragment) fragmentManager
-                        .findFragmentByTag(NEWS_FRAGMENT_STRING);
-            }
-        }else{
-            if (fragmentManager.getFragments().size() == 0) {
-                newsFragment = new NewsFragment();
-                emptyFragment = new EmptyFragment();
-                fragmentManager
-                        .beginTransaction()
-                        .add(R.id.main_frame_layout, newsFragment, NEWS_FRAGMENT_STRING_LANDSCAPE)
-                        .add(R.id.main_frame_layout_empty, emptyFragment, NEWS_EMPTY_FRAGMENT_STRING)
-                        .commit();
-            } else {
-                newsFragment = (NewsFragment) fragmentManager.findFragmentByTag(NEWS_FRAGMENT_STRING_LANDSCAPE);
-                emptyFragment = (EmptyFragment) fragmentManager.findFragmentByTag(NEWS_EMPTY_FRAGMENT_STRING);
-            }
-        }*/
 
         BottomNavigationView bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
 
@@ -104,10 +77,25 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem selectedItem) {
                 switch (selectedItem.getItemId()){
                     case R.id.menu_item_politika:
-                        navController.navigate(R.id.newsFragment);
+                        switch (navController.getCurrentDestination().getId()){
+                            case R.id.saobracajFragment:
+                                navController.navigate(R.id.action_saobracajFragment_pop);
+                                break;
+                            default:
+                                //Do nothing
+                                break;
+                        }
                         return true;
-                    case R.id.menu_item_sport:
-                        navController.navigate(R.id.saobracajFragment);
+                    case R.id.menu_item_saobracaj:
+                        switch (navController.getCurrentDestination().getId()){
+                            case R.id.newsFragment:
+                            case R.id.newsDetailsFragment:
+                                navController.navigate(R.id.action_global_saobracajFragment);
+                                break;
+                            default:
+                                //Do nothing
+                                break;
+                        }
                         return true;
                     default:
                         break;
