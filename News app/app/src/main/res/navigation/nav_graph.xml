@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/newsFragment">
+
+    <fragment
+        android:id="@+id/newsFragment"
+        android:name="ika.t.newsapp.news.NewsFragment"
+        android:label="fragment_news"
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_newsFragment_to_saobracajFragment"
+            app:destination="@id/saobracajFragment" />
+        <action
+            android:id="@+id/action_newsFragment_to_newsDetailsFragment"
+            app:destination="@id/newsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/saobracajFragment"
+        android:name="ika.t.newsapp.news.SaobracajFragment"
+        android:label="fragment_saobracaj"
+        tools:layout="@layout/fragment_saobracaj" >
+        <action
+            android:id="@+id/action_saobracajFragment_pop"
+            app:popUpTo="@id/saobracajFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <action android:id="@+id/action_global_saobracajFragment" app:destination="@id/saobracajFragment" />
+    <fragment
+        android:id="@+id/newsDetailsFragment"
+        android:name="ika.t.newsapp.news.NewsDetailsFragment"
+        android:label="fragment_news_details"
+        tools:layout="@layout/fragment_news_details" />
+</navigation>

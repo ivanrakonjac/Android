@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import ika.t.newsapp.news.News;
 import ika.t.newsapp.news.NewsDetailsFragment;
 import ika.t.newsapp.news.NewsFragment;
 import ika.t.newsapp.news.NewsViewModel;
+import ika.t.newsapp.news.SaobracajFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,48 +32,46 @@ public class MainActivity extends AppCompatActivity {
     private NewsViewModel newsViewModel;
 
     private NewsFragment newsFragment;
-    private String NEWS_FRAGMENT_STRING = "NEWS_FRAGMENT_STRING";
-    private String NEWS_FRAGMENT_STRING_LANDSCAPE = "NEWS_FRAGMENT_STRING_LANDSCAPE";
+    private String NEWS_FRAGMENT_STRING = "NEWS_FRAGMENT";
 
-    private EmptyFragment emptyFragment;
-    private String NEWS_EMPTY_FRAGMENT_STRING = "NEWS_EMPTY_FRAGMENT_STRING";
+    private SaobracajFragment saobracajFragment;
+    private String SAOBRACAJ_FRAGMENT_STRING = "SAOBRACAJ_FRAGMENT";
+
+    private NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
+
+        setContentView(R.layout.activity_main);
+
+        //binding = ActivityMainBinding.inflate(getLayoutInflater());
+        //setContentView(binding.getRoot());
 
         fragmentManager = getSupportFragmentManager();
 
+        newsFragment = new NewsFragment();
+        saobracajFragment = new SaobracajFragment();
+
+        /*fragmentManager
+                .beginTransaction()
+                .add(R.id.main_frame_layout, newsFragment, NEWS_FRAGMENT_STRING)
+                .commit();*/
+
         newsViewModel = new ViewModelProvider(this).get(NewsViewModel.class);
+
+        final NavHostFragment navHost = (NavHostFragment) fragmentManager.findFragmentById(R.id.nav_host_fragment);
+        navController = navHost.getNavController();
 
         newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
             @Override
             public void onChanged(News selectedNews) {
-                if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
-                    if(selectedNews != null){
-                        fragmentManager
-                                .beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.main_frame_layout, new NewsDetailsFragment(), "DETAILS")
-                                .commit();
-                    }
-                }else{
-                    if(selectedNews != null){
-                        fragmentManager
-                                .beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.main_frame_layout_empty, new NewsDetailsFragment(), "DETAILS")
-                                .commit();
-                    }
-                }
-
+                navController.navigate(R.id.newsDetailsFragment);
             }
         });
 
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
+        /*if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT){
             if (fragmentManager.getFragments().size() == 0) {
                 newsFragment = new NewsFragment();
                 fragmentManager
@@ -94,17 +95,19 @@ public class MainActivity extends AppCompatActivity {
                 newsFragment = (NewsFragment) fragmentManager.findFragmentByTag(NEWS_FRAGMENT_STRING_LANDSCAPE);
                 emptyFragment = (EmptyFragment) fragmentManager.findFragmentByTag(NEWS_EMPTY_FRAGMENT_STRING);
             }
-        }
+        }*/
 
-        binding.bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        BottomNavigationView bottomMenu = (BottomNavigationView) findViewById(R.id.bottom_navigation_view);
+
+        bottomMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem selectedItem) {
                 switch (selectedItem.getItemId()){
                     case R.id.menu_item_politika:
-                        Toast.makeText(getBaseContext(), "Politika", Toast.LENGTH_SHORT).show();
+                        navController.navigate(R.id.newsFragment);
                         return true;
                     case R.id.menu_item_sport:
-                        Toast.makeText(getBaseContext(), "Sport", Toast.LENGTH_SHORT).show();
+                        navController.navigate(R.id.saobracajFragment);
                         return true;
                     default:
                         break;

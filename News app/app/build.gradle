@@ -39,4 +39,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'
     implementation 'androidx.lifecycle:lifecycle-viewmodel:2.3.0-beta01'
 
+    implementation 'androidx.navigation:navigation-fragment:2.3.2'
+    implementation 'androidx.navigation:navigation-ui:2.3.2'
+
 }

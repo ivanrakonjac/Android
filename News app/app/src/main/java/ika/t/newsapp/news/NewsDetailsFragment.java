@@ -31,7 +31,7 @@ public class NewsDetailsFragment extends Fragment {
         MainActivity parentActivity = (MainActivity) getActivity();
         newsViewModel = new ViewModelProvider(parentActivity).get(NewsViewModel.class);
 
-        newsViewModel.getSelectedNews().observe(this, new Observer<News>() {
+        newsViewModel.getSelectedNews().observe(getViewLifecycleOwner(), new Observer<News>() {
             @Override
             public void onChanged(News selectedNews) {
                 binding.newsImage.setImageDrawable(selectedNews.getImage());
