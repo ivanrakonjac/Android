@@ -12,9 +12,11 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,22 +55,20 @@ public class RouteBrowseFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentRouteBrowseBinding.inflate(inflater, container, false);
 
-        getViewLifecycleOwner().getLifecycle().addObserver( new LifeCycleAwareLogger(
-                MainActivity.LOG_TAG,
-                RouteBrowseFragment.class.getSimpleName() + "View"
-        ));
-
         RouteAdapter routeAdapter = new RouteAdapter(
-                mainActivity,
+                routeViewModel,
                 routeIndex -> {
                     RouteBrowseFragmentDirections.ActionShowRouteDetails action = RouteBrowseFragmentDirections.actionShowRouteDetails();
                     action.setRouteIndex(routeIndex);
                     navController.navigate(action);
+                },
+                routeIndex -> {
+                    Toast.makeText(mainActivity, "Pokreni mapu", Toast.LENGTH_SHORT).show();
                 }
         );
         binding.recyclerView.setHasFixedSize(true);

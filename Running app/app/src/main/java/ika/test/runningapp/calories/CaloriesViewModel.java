@@ -39,7 +39,7 @@ public class CaloriesViewModel extends ViewModel {
             return caloriesBurnedSavedValue;
         });
 
-        LiveData<Integer> caloriesNeededSaved = savedStateHandle.getLiveData(CALORIES_NEEDED_KEY, 1);
+        LiveData<Integer> caloriesNeededSaved = savedStateHandle.getLiveData(CALORIES_NEEDED_KEY, -1);
         caloriesNeeded = Transformations.map(caloriesNeededSaved, caloriesNeededSavedValue->{
             //Neka slozena transformacija
             return caloriesNeededSavedValue;

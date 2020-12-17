@@ -5,12 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.List;
-
-import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.databinding.ViewHolderRouteBinding;
 
 public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHolder> {
@@ -20,14 +15,14 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     }
 
     private final RouteViewModel routeViewModel;
-    private final MainActivity mainActivity;
 
-    private final Callback<Integer> callback;
+    private final Callback<Integer> callbackDescription;
+    private final Callback<Integer> callbackLocation;
 
-    public RouteAdapter(MainActivity mainActivity, Callback<Integer> callback){
-        this.mainActivity = mainActivity;
-        this.routeViewModel = new ViewModelProvider(this.mainActivity).get(RouteViewModel.class);
-        this.callback = callback;
+    public RouteAdapter(RouteViewModel routeViewModel, Callback<Integer> callbackDescription, Callback<Integer> callbackLocation){
+        this.routeViewModel = routeViewModel;
+        this.callbackDescription = callbackDescription;
+        this.callbackLocation = callbackLocation;
     }
 
     @NonNull
@@ -68,10 +63,18 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
                 @Override
                 public void onClick(View v) {
                     int routeIndex = getAdapterPosition();
-                    //routeViewModel.setSelectedRoute(routeViewModel.getRoutes().get(routeIndex));
-                    callback.invoke(routeIndex);
+                    callbackDescription.invoke(routeIndex);
                 }
             });
+
+            binding.lokacijaButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int routeIndex = getAdapterPosition();
+                    callbackLocation.invoke(routeIndex);
+                }
+            });
+
 
         }
     }
