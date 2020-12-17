@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                         return true;
-                    case R.id.menu_item_settings:
+                    case R.id.menu_item_workouts:
                         return true;
                 }
                 return false;

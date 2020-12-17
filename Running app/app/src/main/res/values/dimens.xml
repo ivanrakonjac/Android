@@ -2,4 +2,5 @@
 <resources>
     <dimen name="buttonMargins">32dp</dimen>
     <dimen name="route_details_fragment_text_margin">8dp</dimen>
+    <dimen name="route_card_corner_radius">20px</dimen>
 </resources>
