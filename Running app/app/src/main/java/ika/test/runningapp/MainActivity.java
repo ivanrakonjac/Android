@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         //Dohvatamo NavHostFragment pomocu fragmentManagera, da bi dohvatili NavController
-        NavHostFragment navHostFragment = (NavHostFragment)fragmentManager.findFragmentById(R.id.nav_host_fragment);
+        NavHostFragment navHostFragment = (NavHostFragment)fragmentManager.findFragmentById(R.id.nav_host_container);
         navController = navHostFragment.getNavController();
 
 
