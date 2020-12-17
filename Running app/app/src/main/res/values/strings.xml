@@ -15,4 +15,5 @@
     <string name="action_1">Vise</string>
     <string name="action_2">Opis</string>
     <string name="route_toolbal_label">Walking Routes</string>
+    <string name="calories_toolbar_label">Calories Calculator</string>
 </resources>

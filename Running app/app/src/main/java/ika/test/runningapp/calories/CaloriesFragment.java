@@ -3,9 +3,13 @@ package ika.test.runningapp.calories;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,21 +26,28 @@ public class CaloriesFragment extends Fragment {
     private FragmentCaloriesBinding binding;
     private CaloriesViewModel caloriesViewModel;
 
+    private NavController navController;
+    private MainActivity mainActivity;
+
     public CaloriesFragment() {
-        getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "CaloriesFragment "));
+        //getLifecycle().addObserver(new LifeCycleAwareLogger("LIFE_CYCLE_TAG", "CaloriesFragment "));
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        mainActivity = (MainActivity) requireActivity();
+        caloriesViewModel = new ViewModelProvider(mainActivity).get(CaloriesViewModel.class);
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentCaloriesBinding.inflate(inflater, container, false);
 
         getLifecycle().addObserver(new LifeCycleAwareLogger("lifeCycleLogger", "MainActivity"));
-
-        MainActivity parentActivity = (MainActivity) getActivity();
-
-        caloriesViewModel = new ViewModelProvider(parentActivity).get(CaloriesViewModel.class);
 
         caloriesViewModel.getCaloriesBurned().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
@@ -73,9 +84,15 @@ public class CaloriesFragment extends Fragment {
         });
 
         String[] metStrings = getResources().getStringArray(R.array.met_strings);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(parentActivity, android.R.layout.simple_list_item_1, metStrings);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(mainActivity, android.R.layout.simple_list_item_1, metStrings);
         binding.spinner.setAdapter(arrayAdapter);
 
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        navController = Navigation.findNavController(view);
     }
 }
