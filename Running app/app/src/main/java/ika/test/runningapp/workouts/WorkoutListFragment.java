@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.Date;
+import java.util.List;
 
 import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
@@ -51,6 +53,13 @@ public class WorkoutListFragment extends Fragment {
         RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
 
         runDatabase.workoutDao().insert(new Workout(0, new Date(),"Dummy", 11,60));
+
+        WorkoutAdapter workoutAdapter = new WorkoutAdapter();
+        List<Workout> workoutList = runDatabase.workoutDao().getAll();
+        workoutAdapter.setWorkoutList(workoutList);
+
+        binding.recyclerView.setAdapter(workoutAdapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
 
         return binding.getRoot();
     }
