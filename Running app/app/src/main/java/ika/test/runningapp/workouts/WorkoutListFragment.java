@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
@@ -62,6 +63,11 @@ public class WorkoutListFragment extends Fragment {
 
         binding.recyclerView.setAdapter(workoutAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
+
+        binding.floatingActionButton.setOnClickListener(view ->{
+            NavDirections action = WorkoutListFragmentDirections.actionWorkoutListFragmentToWorkoutCreateFragment();
+            navController.navigate(action);
+        });
 
         return binding.getRoot();
     }

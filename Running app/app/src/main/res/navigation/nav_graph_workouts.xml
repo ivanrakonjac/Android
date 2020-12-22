@@ -10,5 +10,14 @@
         android:id="@+id/workoutListFragment"
         android:name="ika.test.runningapp.workouts.WorkoutListFragment"
         android:label="fragment_workout_list"
-        tools:layout="@layout/fragment_workout_list" />
+        tools:layout="@layout/fragment_workout_list" >
+        <action
+            android:id="@+id/action_workoutListFragment_to_workoutCreateFragment"
+            app:destination="@id/workoutCreateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workoutCreateFragment"
+        android:name="ika.test.runningapp.workouts.WorkoutCreateFragment"
+        android:label="fragment_workout_create"
+        tools:layout="@layout/fragment_workout_create" />
 </navigation>
