@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+
 import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
 import ika.test.runningapp.data.RunDatabase;
@@ -46,6 +48,16 @@ public class WorkoutCreateFragment extends Fragment {
 
         binding.toolbar.setNavigationOnClickListener(
                 view -> navController.navigateUp());
+
+        binding.workoutDateEditText.setOnClickListener(view -> {
+            new DatePickerFragment().show(getChildFragmentManager(), null);
+        });
+
+        getChildFragmentManager().setFragmentResultListener(REQUEST_KEY, this, (requestKey, result)->{
+            Date date = (Date) result.getSerializable(DatePickerFragment.SET_DATE_KEY);
+            String dateForEditText = DateTimeUtil.getSimpleDateFormat().format(date);
+            binding.workoutDateEditText.setText(dateForEditText);
+        });
 
         return binding.getRoot();
     }
