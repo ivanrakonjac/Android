@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ika.test.runningapp.data.Workout;
@@ -13,7 +14,7 @@ import ika.test.runningapp.databinding.ViewHolderWorkoutBinding;
 
 public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutViewHolder> {
 
-    private List<Workout> workoutList;
+    private List<Workout> workoutList = new ArrayList<>();
 
     public WorkoutAdapter() {
 
@@ -21,6 +22,8 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
     public void setWorkoutList(List<Workout> workoutList) {
         this.workoutList = workoutList;
+        //kada se promene stvari, obavesti da bi se opet iscrtalo
+        this.notifyDataSetChanged();
     }
 
     @NonNull

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -55,8 +56,9 @@ public class WorkoutListFragment extends Fragment {
         runDatabase.workoutDao().insert(new Workout(0, new Date(),"Dummy", 11,60));
 
         WorkoutAdapter workoutAdapter = new WorkoutAdapter();
-        List<Workout> workoutList = runDatabase.workoutDao().getAll();
-        workoutAdapter.setWorkoutList(workoutList);
+        LiveData<List<Workout>> workoutLiveDataList = runDatabase.workoutDao().getAllLiveData();
+
+        workoutLiveDataList.observe(getViewLifecycleOwner(), workoutAdapter::setWorkoutList);
 
         binding.recyclerView.setAdapter(workoutAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
