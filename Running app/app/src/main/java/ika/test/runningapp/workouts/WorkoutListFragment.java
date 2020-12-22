@@ -8,13 +8,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.Date;
+
 import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
+import ika.test.runningapp.data.RunDatabase;
+import ika.test.runningapp.data.Workout;
 import ika.test.runningapp.databinding.FragmentWorkoutListBinding;
 
 
@@ -42,6 +47,11 @@ public class WorkoutListFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
+
+        RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
+
+        runDatabase.workoutDao().insert(new Workout(0, new Date(),"Dummy", 11,60));
+
         return binding.getRoot();
     }
 
