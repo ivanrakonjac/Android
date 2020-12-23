@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
@@ -24,6 +25,7 @@ import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
 import ika.test.runningapp.data.RunDatabase;
 import ika.test.runningapp.data.Workout;
+import ika.test.runningapp.data.WorkoutRepository;
 import ika.test.runningapp.databinding.FragmentWorkoutListBinding;
 
 
@@ -44,7 +46,16 @@ public class WorkoutListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mainActivity = (MainActivity) requireActivity();
-        workoutViewModel = new ViewModelProvider(mainActivity).get(WorkoutViewModel.class);
+        RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
+        WorkoutRepository workoutRepository = new WorkoutRepository(runDatabase.workoutDao());
+        ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new WorkoutViewModel(workoutRepository);
+            }
+        };
+        workoutViewModel = new ViewModelProvider(mainActivity, factory).get(WorkoutViewModel.class);
     }
 
     @Override
@@ -52,12 +63,8 @@ public class WorkoutListFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
 
-        RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
-
-        runDatabase.workoutDao().insert(new Workout(0, new Date(),"Dummy", 11,60));
-
         WorkoutAdapter workoutAdapter = new WorkoutAdapter();
-        LiveData<List<Workout>> workoutLiveDataList = runDatabase.workoutDao().getAllLiveData();
+        LiveData<List<Workout>> workoutLiveDataList = workoutViewModel.getWorkoutList();
 
         workoutLiveDataList.observe(getViewLifecycleOwner(), workoutAdapter::setWorkoutList);
 

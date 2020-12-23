@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,9 +22,9 @@ import java.text.ParseException;
 import java.util.Date;
 
 import ika.test.runningapp.MainActivity;
-import ika.test.runningapp.R;
 import ika.test.runningapp.data.RunDatabase;
 import ika.test.runningapp.data.Workout;
+import ika.test.runningapp.data.WorkoutRepository;
 import ika.test.runningapp.databinding.FragmentWorkoutCreateBinding;
 
 public class WorkoutCreateFragment extends Fragment {
@@ -44,6 +45,15 @@ public class WorkoutCreateFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mainActivity = (MainActivity) requireActivity();
+        RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
+        WorkoutRepository workoutRepository = new WorkoutRepository(runDatabase.workoutDao());
+        ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
+            @NonNull
+            @Override
+            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
+                return (T) new WorkoutViewModel(workoutRepository);
+            }
+        };
         workoutViewModel = new ViewModelProvider(mainActivity).get(WorkoutViewModel.class);
     }
 
@@ -72,9 +82,8 @@ public class WorkoutCreateFragment extends Fragment {
             Number duration = (Number) parse(binding.workoutDuration , NumberFormat.getIntegerInstance());
 
             if(!(date ==null || label==null || distance==null || duration==null)){
-                RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
                 Workout workout = new Workout(0, date, label, distance.doubleValue(), duration.doubleValue());
-                runDatabase.workoutDao().insert(workout);
+                workoutViewModel.insertWorkout(workout);
 
                 navController.navigateUp();
             }
