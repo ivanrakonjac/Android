@@ -13,11 +13,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.textfield.TextInputLayout;
+
+import java.text.Format;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Date;
 
 import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
 import ika.test.runningapp.data.RunDatabase;
+import ika.test.runningapp.data.Workout;
 import ika.test.runningapp.databinding.FragmentWorkoutCreateBinding;
 
 public class WorkoutCreateFragment extends Fragment {
@@ -59,6 +65,22 @@ public class WorkoutCreateFragment extends Fragment {
             binding.workoutDateEditText.setText(dateForEditText);
         });
 
+        binding.create.setOnClickListener(view -> {
+            Date date = (Date) parse(binding.workoutDate, DateTimeUtil.getSimpleDateFormat());
+            String label = (String) parse(binding.workoutLabel, null);
+            Number distance = (Number) parse(binding.workoutDistance, NumberFormat.getIntegerInstance());
+            Number duration = (Number) parse(binding.workoutDuration , NumberFormat.getIntegerInstance());
+
+            if(!(date ==null || label==null || distance==null || duration==null)){
+                RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
+                Workout workout = new Workout(0, date, label, distance.doubleValue(), duration.doubleValue());
+                runDatabase.workoutDao().insert(workout);
+
+                navController.navigateUp();
+            }
+
+        });
+
         return binding.getRoot();
     }
 
@@ -66,6 +88,28 @@ public class WorkoutCreateFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+    }
+
+    private Object parse(TextInputLayout textInputLayout, Format format){
+        Object result;
+        try{
+            String inputString = textInputLayout.getEditText().getText().toString();
+            if(!inputString.equals("")){
+                if(format != null){
+                    result = format.parseObject(inputString);
+                }else{
+                    result = inputString;
+                }
+                textInputLayout.setError(null);
+            }else{
+                textInputLayout.setError("Obavezno polje!");
+                result = null;
+            }
+        } catch (ParseException e) {
+            textInputLayout.setError("Pogresan format!");
+            result = null;
+        }
+        return result;
     }
 
 }
