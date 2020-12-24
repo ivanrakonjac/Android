@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.os.Bundle;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import ika.test.runningapp.databinding.ActivityMainBinding;
 
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     public final static String LOG_TAG = "running-app-eample";

@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import java.util.Date;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import ika.test.runningapp.MainActivity;
 import ika.test.runningapp.R;
 import ika.test.runningapp.data.RunDatabase;
@@ -28,7 +29,7 @@ import ika.test.runningapp.data.Workout;
 import ika.test.runningapp.data.WorkoutRepository;
 import ika.test.runningapp.databinding.FragmentWorkoutListBinding;
 
-
+@AndroidEntryPoint
 public class WorkoutListFragment extends Fragment {
 
     private FragmentWorkoutListBinding binding;
@@ -46,16 +47,7 @@ public class WorkoutListFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mainActivity = (MainActivity) requireActivity();
-        RunDatabase runDatabase = RunDatabase.getInstance(mainActivity);
-        WorkoutRepository workoutRepository = new WorkoutRepository(runDatabase.workoutDao());
-        ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
-            @NonNull
-            @Override
-            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new WorkoutViewModel(workoutRepository);
-            }
-        };
-        workoutViewModel = new ViewModelProvider(mainActivity, factory).get(WorkoutViewModel.class);
+        workoutViewModel = new ViewModelProvider(mainActivity).get(WorkoutViewModel.class);
     }
 
     @Override
