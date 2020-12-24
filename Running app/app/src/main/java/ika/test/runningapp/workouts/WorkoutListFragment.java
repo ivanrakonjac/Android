@@ -55,6 +55,15 @@ public class WorkoutListFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentWorkoutListBinding.inflate(inflater, container, false);
 
+        binding.toolbar.inflateMenu(R.menu.workout_options_menu);
+        binding.toolbar.setOnMenuItemClickListener(menuItem -> {
+            switch (menuItem.getItemId()){
+                case R.id.workout_menu_item_sort:
+                    return true;
+            }
+            return false;
+        });
+
         WorkoutAdapter workoutAdapter = new WorkoutAdapter();
         LiveData<List<Workout>> workoutLiveDataList = workoutViewModel.getWorkoutList();
 
