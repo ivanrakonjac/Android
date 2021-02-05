@@ -41,22 +41,59 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.nav_home:
-                        // Dodaje se novi fragment (R.id.homeFragment) na back stack
-                        navigationCtrl.navigate(R.id.homeFragment);
-                        Toast.makeText(getBaseContext(), "HOME", Toast.LENGTH_SHORT).show();
-                        break;
+                        switch (navigationCtrl.getCurrentDestination().getId()){
+                            case R.id.favoritesFragment:
+                                navigationCtrl.navigate(R.id.action_favoritesFragment_pop); // Dodaje se novi fragment (R.id.homeFragment) na back stack
+                                break;
+                            case R.id.searchFragment:
+                                navigationCtrl.navigate(R.id.action_searchFragment_pop);
+                            default:
+                                // Empty
+                                break;
+                        }
+                        return true;
                     case R.id.nav_favorites:
-                        navigationCtrl.navigate(R.id.favoritesFragment);
-                        Toast.makeText(getBaseContext(), "FAV", Toast.LENGTH_SHORT).show();
-                        break;
+                        switch (navigationCtrl.getCurrentDestination().getId()){
+                            case R.id.homeFragment:
+                            case R.id.searchFragment:
+                                navigationCtrl.navigate(R.id.action_global_favoritesFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                                break;
+                            default:
+                                // Empty
+                                break;
+                        }
+                        return true;
                     case R.id.nav_search:
-                        navigationCtrl.navigate(R.id.searchFragment);
-                        Toast.makeText(getBaseContext(), "SEARCH", Toast.LENGTH_SHORT).show();
-                        break;
+                        switch (navigationCtrl.getCurrentDestination().getId()){
+                            case R.id.homeFragment:
+                            case R.id.favoritesFragment:
+                                navigationCtrl.navigate(R.id.action_global_searchFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                                break;
+                            default:
+                                // Empty
+                                break;
+                        }
+                        return true;
                 }
 
                 return true;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        switch (navigationCtrl.getCurrentDestination().getId()){
+            case R.id.favoritesFragment:
+                navigationCtrl.navigate(R.id.action_global_homeFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                break;
+            case R.id.searchFragment:
+                navigationCtrl.navigate(R.id.action_global_homeFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                break;
+            default:
+                super.onBackPressed();
+                break;
+        }
+
     }
 }
