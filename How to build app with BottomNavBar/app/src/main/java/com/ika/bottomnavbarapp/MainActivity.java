@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.os.Bundle;
@@ -39,14 +40,18 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                NavDirections actionHome = NavGraphDirections.actionGlobalHomeFragment();
+                NavDirections actionFavorites = NavGraphDirections.actionGlobalFavoritesFragment();
+                NavDirections actionSearch = NavGraphDirections.actionGlobalSearchFragment();
+
                 switch (item.getItemId()){
                     case R.id.nav_home:
                         switch (navigationCtrl.getCurrentDestination().getId()){
                             case R.id.favoritesFragment:
-                                navigationCtrl.navigate(R.id.action_favoritesFragment_pop); // Dodaje se novi fragment (R.id.homeFragment) na back stack
-                                break;
                             case R.id.searchFragment:
-                                navigationCtrl.navigate(R.id.action_searchFragment_pop);
+                                navigationCtrl.navigate(actionHome);
+                                break;
                             default:
                                 // Empty
                                 break;
@@ -56,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (navigationCtrl.getCurrentDestination().getId()){
                             case R.id.homeFragment:
                             case R.id.searchFragment:
-                                navigationCtrl.navigate(R.id.action_global_favoritesFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                                navigationCtrl.navigate(actionFavorites); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
                                 break;
                             default:
                                 // Empty
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                         switch (navigationCtrl.getCurrentDestination().getId()){
                             case R.id.homeFragment:
                             case R.id.favoritesFragment:
-                                navigationCtrl.navigate(R.id.action_global_searchFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                                navigationCtrl.navigate(actionSearch); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
                                 break;
                             default:
                                 // Empty
@@ -85,13 +90,28 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         switch (navigationCtrl.getCurrentDestination().getId()){
             case R.id.favoritesFragment:
-                navigationCtrl.navigate(R.id.action_global_homeFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                NavDirections actionPopFav = FavoritesFragmentDirections.actionFavoritesFragmentPop(); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                navigationCtrl.navigate(actionPopFav);
                 break;
             case R.id.searchFragment:
-                navigationCtrl.navigate(R.id.action_global_homeFragment); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
+                NavDirections actionPopSearch = SearchFragmentDirections.actionSearchFragmentPop();
+                navigationCtrl.navigate(actionPopSearch); // Skidaj sve fragmente sa back stacka dok ne skines favoritesFragment
                 break;
             default:
                 super.onBackPressed();
+                break;
+        }
+
+
+        switch (navigationCtrl.getCurrentDestination().getId()){
+            case R.id.favoritesFragment:
+                bottomNavigationView.setSelectedItemId(R.id.nav_favorites);
+                break;
+            case R.id.searchFragment:
+                bottomNavigationView.setSelectedItemId(R.id.nav_search);
+                break;
+            case R.id.homeFragment:
+                bottomNavigationView.setSelectedItemId(R.id.nav_home);
                 break;
         }
 
