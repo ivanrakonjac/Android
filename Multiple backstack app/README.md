@@ -1,68 +1,38 @@
-# Beleske
+# Multiple backstack app Beleske
 
-Steps:
+Da bi imasli vise backstackova neko treba da ih cuva.
+
+To moze da radi aktivnost ili fragment (nav host fragment).
+
+NavHostFragment ima svoje child fragmente i on vodi racuna o njima kroz svoj child fragmentManager.
+Ne baratamo mi eksplicitno fragmentManagerom.
+
+Ideja:
+- programskim putem napraviti vise nav host fragmenata
+- svaki ce imati svoj backstack
+- svaki ce imati nav host controller
+- menjati ih (nav host fragmente) klikom na ikonicu u meniju
+
+Koraci:
 
 1)
-Add dependencies
-How to know which? -> https://developer.android.com/jetpack/androidx/releases/navigation
+
+U main activity staviti 1 nav host container
+
+	<androidx.fragment.app.FragmentContainerView
+    android:id="@+id/nav_host_container"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+    app:layout_constraintTop_toTopOf="parent" />
 
 2)
-Add icons for menu, create bottom_nav_menu.xlm and add it to main_activity
 
+Napraviti nav_graphova koliko imamo komponenti u meniju   
+Podesiti putanje unutar grafova   
+Setovati home fragmente   
 
 3)
-Add a NavHost to an activity
 
-4)
-Dodati nav_graph
+Podesiti idjeve itema u botoom navigaciji i nav_grafova da budu isti radi lakseg baratanja
 
-Svaki NavHost fragment ima 1 NavController koji regulise navigaciju.
-Ako dohvatimo taj NavController, mozemo navigirati medju fragmentima.
-
-	navigationCtrl = navHostFragment.getNavController();
-
-Postoji vise nacina kako preci sa 1 fragmenta na 2:
-
-1) Pomocu destinacije (id fragmenta na koji treba preci) - nije dobra praksa
-
-	public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-		switch (item.getItemId()){
-		    case R.id.nav_home:
-		        // Dodaje se novi fragment (R.id.homeFragment) na back stack
-		        navigationCtrl.navigate(R.id.homeFragment);
-		        Toast.makeText(getBaseContext(), "HOME", Toast.LENGTH_SHORT).show();
-		        break;
-	}
-
-2) Pomocu akcija
-
-Da bi se koristile potrebno ih je dodati u nav_graphu
-
-	Tip akcije:
-	-Obicna izmedju fragmenata (sa 1 na 2)
-	-Globalna (dostupna sa vise fragmenata, tj. sa vise fragmenata mozemo preci na taj neki destinacioni)
-	-Back to destination (vracamo se na fragment odakle smo dosli)
-
-3) Safa args plugin
-
-https://developer.android.com/jetpack/androidx/releases/navigation
-
-Mogucnost provere u compile timeu da li radimo stvari kako treba
-
-Za svaki destionation postoji (generise se) klasa koja ga predstavlja
-U tim klasama se nalaze staticke metode koje nam vracaju navDirection objekat na osnovu nav_grapha
-
-Omogucava nam da prosledimo neki parametar izmedju fragmenata.
-
-https://developer.android.com/reference/androidx/fragment/app/Fragment
-
-Generise klasu za argumente, koja cuva argumente u bundlu i omogucava nam da ih iz njega dohvatimo.
-
-
-Saveti:
-
-Paziti gde se sta inicijalizuje u fragmentima zbog life cycla!
-
-
-Kako ubiti aktivnost:
-Pritisnuti Home dugme na telefonu, a zatim otici u logcat, dve tackice u donjem levom uglu, pritisnuti crveni kvadrat.
