@@ -10,10 +10,5 @@
         android:name="com.ika.bottomnavbarapp.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
-        <argument
-            android:name="indexHome"
-            app:argType="string"
-            android:defaultValue="IVAN" />
     </fragment>
-    <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
 </navigation>

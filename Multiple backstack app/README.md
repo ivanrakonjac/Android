@@ -36,3 +36,9 @@ Setovati home fragmente
 
 Podesiti idjeve itema u botoom navigaciji i nav_grafova da budu isti radi lakseg baratanja
 
+4)
+
+Napraviti klasu za kod za upravljanje navigacijom.
+Komentari o klasi su u kodu.
+Klasa: BottomNavUtil
+

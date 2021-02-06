@@ -27,9 +27,9 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
 
 
-        String homeString = HomeFragmentArgs.fromBundle(requireArguments()).getIndexHome();
+       // String homeString = HomeFragmentArgs.fromBundle(requireArguments()).getIndexHome();
 
-        binding.homeFragmentTextView.setText("Home fragment " + homeString);
+        //binding.homeFragmentTextView.setText("Home fragment " + homeString);
 
 
         return binding.getRoot();

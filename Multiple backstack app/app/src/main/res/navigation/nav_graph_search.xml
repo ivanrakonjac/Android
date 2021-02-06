@@ -10,14 +10,5 @@
         android:name="com.ika.bottomnavbarapp.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
-        <action
-            android:id="@+id/action_searchFragment_pop"
-            app:popUpTo="@id/searchFragment"
-            app:popUpToInclusive="true" />
-        <argument
-            android:name="searchIndex"
-            app:argType="integer"
-            android:defaultValue="11" />
     </fragment>
-    <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />
 </navigation>

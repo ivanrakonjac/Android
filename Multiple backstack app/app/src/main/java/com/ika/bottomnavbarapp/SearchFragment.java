@@ -28,9 +28,9 @@ public class SearchFragment extends Fragment {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
 
 
-        int searchIndex = SearchFragmentArgs.fromBundle(requireArguments()).getSearchIndex();
+        //int searchIndex = SearchFragmentArgs.fromBundle(requireArguments()).getSearchIndex();
 
-        binding.searchTextView.setText("Search fragment " + searchIndex);
+        //binding.searchTextView.setText("Search fragment " + searchIndex);
 
 
         return binding.getRoot();
