@@ -10,6 +10,10 @@
         android:name="com.ika.bottomnavbarapp.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="indexHome"
+            app:argType="string"
+            android:defaultValue="IVAN" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -20,6 +24,10 @@
             android:id="@+id/action_searchFragment_pop"
             app:popUpTo="@id/searchFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="searchIndex"
+            app:argType="integer"
+            android:defaultValue="11" />
     </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
@@ -30,6 +38,10 @@
             android:id="@+id/action_favoritesFragment_pop"
             app:popUpTo="@id/favoritesFragment"
             app:popUpToInclusive="true" />
+        <argument
+            android:name="index"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <action android:id="@+id/action_global_favoritesFragment" app:destination="@id/favoritesFragment" />
     <action android:id="@+id/action_global_searchFragment" app:destination="@id/searchFragment" />

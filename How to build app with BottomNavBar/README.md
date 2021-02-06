@@ -42,3 +42,18 @@ Da bi se koristile potrebno ih je dodati u nav_graphu
 	-Obicna izmedju fragmenata (sa 1 na 2)
 	-Globalna (dostupna sa vise fragmenata, tj. sa vise fragmenata mozemo preci na taj neki destinacioni)
 	-Back to destination (vracamo se na fragment odakle smo dosli)
+
+3) Safa args plugin
+
+https://developer.android.com/jetpack/androidx/releases/navigation
+
+Mogucnost provere u compile timeu da li radimo stvari kako treba
+
+Za svaki destionation postoji (generise se) klasa koja ga predstavlja
+U tim klasama se nalaze staticke metode koje nam vracaju navDirection objekat na osnovu nav_grapha
+
+Omogucava nam da prosledimo neki parametar izmedju fragmenata.
+
+https://developer.android.com/reference/androidx/fragment/app/Fragment
+
+Generise klasu za argumente, koja cuva argumente u bundlu i omogucava nam da ih iz njega dohvatimo.
