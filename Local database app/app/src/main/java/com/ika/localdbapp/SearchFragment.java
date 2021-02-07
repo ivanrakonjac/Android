@@ -3,6 +3,8 @@ package com.ika.localdbapp;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
@@ -49,8 +51,8 @@ public class SearchFragment extends Fragment {
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User user = new User(0, "mirko123", "test", "Mirko", "Mirkovic", new Date());
-                userDatabase.userDao().insert(user);
+                NavDirections action = SearchFragmentDirections.actionSearchFragmentToAddNewUserFragment();
+                Navigation.findNavController(v).navigate(action);
             }
         });
 

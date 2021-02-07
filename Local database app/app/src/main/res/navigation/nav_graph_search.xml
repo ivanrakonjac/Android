@@ -10,5 +10,13 @@
         android:name="com.ika.localdbapp.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_addNewUserFragment"
+            app:destination="@id/addNewUserFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addNewUserFragment"
+        android:name="com.ika.localdbapp.AddNewUserFragment"
+        android:label="fragment_add_new_user"
+        tools:layout="@layout/fragment_add_new_user" />
 </navigation>
