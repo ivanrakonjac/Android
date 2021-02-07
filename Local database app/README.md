@@ -50,3 +50,13 @@ Definisanje Baze:
 * A da bi baza znala koje sve konvertere ima potrebno je setovati
 
 		@TypeConverters(value = {DateConverter.class})
+
+5)
+
+Napraviti bazu:
+
+	Room.databaseBuilder((MainActivity)requireActivity(), UserDatabase.class, "user-app.db").build();
+
+* (MainActivity)requireActivity() - context
+* UserDatabase.class - koju bazu pravimo
+* user-app.db - ime baze
