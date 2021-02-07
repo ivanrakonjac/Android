@@ -42,3 +42,11 @@ Definisanje Baze:
 
 * Definisanje public abstract metode za svaki DAO 
 	- public abstract UserDao userDao();  
+
+4)
+
+* Ako u entitetima koristimo tipove podataka koje Room ne podrzava (npr. Data iz java.util paketa), Room ce se buniti
+* To se resava tako sto se napise konverter tog tipa podatka u neki tip koji Room podrzava
+* A da bi baza znala koje sve konvertere ima potrebno je setovati
+
+		@TypeConverters(value = {DateConverter.class})

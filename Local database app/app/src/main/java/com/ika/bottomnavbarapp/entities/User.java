@@ -3,6 +3,8 @@ package com.ika.bottomnavbarapp.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.Date;
+
 @Entity
 public class User{
 
@@ -13,7 +15,16 @@ public class User{
     private String password;
     private String firsName;
     private String lastName;
-    private int ages;
+    private Date birthday;
+
+    public User(long id, String username, String password, String firsName, String lastName, Date birthday) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.firsName = firsName;
+        this.lastName = lastName;
+        this.birthday = birthday;
+    }
 
     public long getId() {
         return id;
@@ -55,11 +66,11 @@ public class User{
         this.lastName = lastName;
     }
 
-    public int getAges() {
-        return ages;
+    public Date getBirthday() {
+        return birthday;
     }
 
-    public void setAges(int ages) {
-        this.ages = ages;
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 }
