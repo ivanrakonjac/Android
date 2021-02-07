@@ -46,6 +46,14 @@ public class SearchFragment extends Fragment {
         binding.recyclerView.setAdapter(userAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager((MainActivity)getActivity()));
 
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                User user = new User(0, "mirko123", "test", "Mirko", "Mirkovic", new Date());
+                userDatabase.userDao().insert(user);
+            }
+        });
+
 
 
 
