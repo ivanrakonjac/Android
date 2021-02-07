@@ -33,7 +33,7 @@ https://developer.android.com/reference/androidx/room/package-summary
 
 3)
 
-Definisanje Baze:
+#### Definisanje Baze:
 
 * @Database(entities = {User.class}, version = 1, exportSchema = false)
 	- entities - koji sve entiteti ulaze u bazu
@@ -67,6 +67,36 @@ Kako proveriti da li je baza napravljen:
 
 * DeviceFileExplorer (desni donji ugao)
 * data/data/dirSaPaketomNaseApp/databases
+* Baza ce biti napravljena tek kada se nesto u nju doda
+
+
+### Dobre fore pri koriscenju
+
+#### Dohvatanje svih elemenata iz neke tabele
+
+U UserDao interfejsu:
+
+	@Query("SELECT * FROM User")
+    List<User> getAll ();
+
+A dohvatanje bi ovako izgledalo:
+
+	List<User> userList = userDatabase.userDao().getAll();
+
+
+Ali mnogo je bolje definisati nesto ovako u UserDao interfejsu:
+
+	@Query("SELECT * FROM User")
+    LiveData<List<User>> getAllLiveData ();
+
+Ovde kazemo: Vrati mi listu Usera, tj. vrati mi LiveData sa listom Usera i menjaj tu listu ako se rezultat SELECT * FROM User promeni.
+
+Room je sam svestan LiveData tipa i sam ce pozvati setList, kada se vrednost promeni.
+
+Mnogo pametnije!
+
+Plus mozemo da observujemo taj live data, pa na promenu vrednosti da menjamo user interface.
+
 
 
 
@@ -88,9 +118,9 @@ Postupak:
 
 * Dodaj RecyclerView u xml layout (aktivnost ili fragment).
 
-	<androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+		<androidx.recyclerview.widget.RecyclerView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content" />
 
 3)
 

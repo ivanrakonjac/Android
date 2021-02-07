@@ -35,13 +35,13 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentSearchBinding.inflate(inflater, container, false);
 
+        UserAdapter userAdapter = new UserAdapter();
+
         UserDatabase userDatabase = UserDatabase.getInstance((MainActivity) getActivity());
 
-        List<User> userList = userDatabase.userDao().getAll();
-
-
-        UserAdapter userAdapter = new UserAdapter();
-        userAdapter.setUserList(userList);
+        userDatabase.userDao().getAllLiveData().observe(getViewLifecycleOwner(), userList -> {
+            userAdapter.setUserList(userList);
+        } );
 
         binding.recyclerView.setAdapter(userAdapter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager((MainActivity)getActivity()));

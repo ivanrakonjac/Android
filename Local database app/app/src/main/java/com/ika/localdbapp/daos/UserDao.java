@@ -1,5 +1,6 @@
 package com.ika.localdbapp.daos;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -16,5 +17,8 @@ public interface UserDao {
 
     @Query("SELECT * FROM User")
     List<User> getAll ();
+
+    @Query("SELECT * FROM User")
+    LiveData<List<User>> getAllLiveData ();
 
 }
