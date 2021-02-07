@@ -60,3 +60,61 @@ Napraviti bazu:
 * (MainActivity)requireActivity() - context
 * UserDatabase.class - koju bazu pravimo
 * user-app.db - ime baze
+
+6)
+
+Kako proveriti da li je baza napravljen:
+
+* DeviceFileExplorer (desni donji ugao)
+* data/data/dirSaPaketomNaseApp/databases
+
+
+
+### Kako napraviti Dynamic lists sa RecyclerView-om
+
+https://developer.android.com/jetpack/androidx/releases/recyclerview
+
+https://developer.android.com/guide/topics/ui/layout/recyclerview
+
+https://stackoverflow.com/questions/40584424/simple-android-recyclerview-example
+
+Postupak:
+
+1)
+
+* Dodati dependecije
+
+2)
+
+* Dodaj RecyclerView u xml layout (aktivnost ili fragment).
+
+	<androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+3)
+
+* Napraviti Adapter klasu koja u sebi sadrzi ViewHolder klasu.
+
+* ViewHolder je klasa koja predstavlja 1 red u listi.
+
+* Adapter upravlja listom pomocu overridovanih metoda.
+
+4)
+
+* U fragmentu/aktivnosti gde je RecyclerView treba narpaviti Adapter.
+
+* Setovati mu listu sa podacima.
+
+* Dodati adapter na RecyclerView i setovati setLayoutManager.
+
+#### Primer sa dohvatanjem liste iz baze:
+
+	UserDatabase userDatabase = UserDatabase.getInstance((MainActivity) getActivity());
+	List<User> userList = userDatabase.userDao().getAll();
+      																							
+	UserAdapter userAdapter = new UserAdapter();
+	userAdapter.setUserList(userList);
+																								
+	binding.recyclerView.setAdapter(userAdapter);
+	binding.recyclerView.setLayoutManager(new LinearLayoutManager((MainActivity)getActivity()));

@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ika.localdbapp.db.UserDatabase;
+import com.ika.localdbapp.entities.User;
+
+import java.util.Date;
+
 
 public class FavoritesFragment extends Fragment {
 
@@ -19,8 +24,13 @@ public class FavoritesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        UserDatabase userDatabase = UserDatabase.getInstance((MainActivity) getActivity());
+
+        User user = new User(0, "Marko123", "test", "Marko", "Markovic", new Date());
+        userDatabase.userDao().insert(user);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites, container, false);
-
     }
 }
