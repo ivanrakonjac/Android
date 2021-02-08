@@ -60,44 +60,38 @@ public class AddNewUserFragment extends Fragment {
 
                 Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
-                Future<?> future = executorService.submit( () -> {
+                Future<Boolean> future = executorService.submit( () -> {
                     //posao koji treba da se odradi
 
-                    mainActivity = (MainActivity) getActivity();
 
                     SystemClock.sleep(1000);
+                    if(Thread.interrupted()) return false;
                     uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.RED) );
 
                     SystemClock.sleep(1000);
+                    if(Thread.interrupted()) return false;
                     uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.YELLOW) );
 
                     SystemClock.sleep(1000);
+                    if(Thread.interrupted()) return false;
                     uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.BLACK) );
 
                     SystemClock.sleep(1000);
+                    if(Thread.interrupted()) return false;
                     uiThreadHandler.post( () -> binding.addNewUser.setText("THE PROPER WAY") );
 
                     SystemClock.sleep(1000);
+                    if(Thread.interrupted()) return false;
                     uiThreadHandler.post( () -> binding.addNewUser.setText("THE PROPER WAY 2") );
 
                     Log.v ("THREADING", "HEEJ");
 
+                    return true;
+
                 });
 
                 executorService.submit( () -> {
-                    try {
-                        // Blokiramo se ovde dok se future ne zavrsi
-                        future.get();
-                        uiThreadHandler.post( () -> {
-                            // Toast je deo UI-a i treba ga koristiti sa UI niti
-                            Toast.makeText(mainActivity, "FINISHED", Toast.LENGTH_SHORT).show();
-                        });
-
-                    } catch (ExecutionException e) {
-                        e.printStackTrace();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    future.cancel(true);
                 });
 
             }
