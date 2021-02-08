@@ -23,20 +23,22 @@ import com.ika.threading.threads.CustomLooperThread;
 
 import java.io.Console;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class AddNewUserFragment extends Fragment {
 
     MainActivity mainActivity;
     FragmentAddNewUserBinding binding;
 
-    private HandlerThread handlerThread;
+    private ExecutorService executorService;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        handlerThread = new HandlerThread("ikas-handler-thread");
-        handlerThread.start();
+        executorService = Executors.newFixedThreadPool(4); // pametno je da broj niti odgovara broju corova
+
     }
 
     @Override
@@ -53,10 +55,9 @@ public class AddNewUserFragment extends Fragment {
                 /*User user = new User(0, "Stanko123", "test", "Stanko", "Stankovic", new Date());
                 userDatabase.userDao().insert(user);*/
 
-                Handler newThreadHandler = new Handler(handlerThread.getLooper());
                 Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
-                newThreadHandler.post( () -> {
+                executorService.submit( () -> {
                     //posao koji treba da se odradi
 
                     mainActivity = (MainActivity) getActivity();
