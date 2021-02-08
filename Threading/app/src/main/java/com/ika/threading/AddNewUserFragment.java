@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,6 +54,7 @@ public class AddNewUserFragment extends Fragment {
                 userDatabase.userDao().insert(user);*/
 
                 Handler newThreadHandler = new Handler(handlerThread.getLooper());
+                Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
                 newThreadHandler.post( () -> {
                     //posao koji treba da se odradi
@@ -60,19 +62,19 @@ public class AddNewUserFragment extends Fragment {
                     mainActivity = (MainActivity) getActivity();
 
                     SystemClock.sleep(1000);
-                    mainActivity.runOnUiThread( () -> binding.addNewUser.setBackgroundColor(Color.RED) );
+                    uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.RED) );
 
                     SystemClock.sleep(1000);
-                    mainActivity.runOnUiThread( () -> binding.addNewUser.setBackgroundColor(Color.YELLOW) );
+                    uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.YELLOW) );
 
                     SystemClock.sleep(1000);
-                    mainActivity.runOnUiThread( () -> binding.addNewUser.setBackgroundColor(Color.BLACK) );
+                    uiThreadHandler.post( () -> binding.addNewUser.setBackgroundColor(Color.BLACK) );
 
                     SystemClock.sleep(1000);
-                    mainActivity.runOnUiThread( () -> binding.addNewUser.setText("THE PROPER WAY") );
+                    uiThreadHandler.post( () -> binding.addNewUser.setText("THE PROPER WAY") );
 
                     SystemClock.sleep(1000);
-                    binding.addNewUser.post( () -> binding.addNewUser.setText("THE PROPER WAY 2") );
+                    uiThreadHandler.post( () -> binding.addNewUser.setText("THE PROPER WAY 2") );
 
                     Log.v ("THREADING", "HEEJ");
 
