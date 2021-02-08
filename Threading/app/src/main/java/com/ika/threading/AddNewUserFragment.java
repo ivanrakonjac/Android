@@ -59,6 +59,8 @@ public class AddNewUserFragment extends Fragment {
 
                     mainActivity.runOnUiThread( () -> binding.addNewUser.setText("THE PROPER WAY") );
 
+                    binding.addNewUser.post( () -> binding.addNewUser.setText("THE PROPER WAY 2") );
+
                     Log.v ("THREADING", "HEEJ");
 
                 }).start();
