@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ika.threading.databinding.FragmentAddNewUserBinding;
 import com.ika.threading.databinding.FragmentSearchBinding;
@@ -23,8 +24,10 @@ import com.ika.threading.threads.CustomLooperThread;
 
 import java.io.Console;
 import java.util.Date;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class AddNewUserFragment extends Fragment {
 
@@ -57,7 +60,7 @@ public class AddNewUserFragment extends Fragment {
 
                 Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
-                executorService.submit( () -> {
+                Future<?> future = executorService.submit( () -> {
                     //posao koji treba da se odradi
 
                     mainActivity = (MainActivity) getActivity();
@@ -79,6 +82,22 @@ public class AddNewUserFragment extends Fragment {
 
                     Log.v ("THREADING", "HEEJ");
 
+                });
+
+                executorService.submit( () -> {
+                    try {
+                        // Blokiramo se ovde dok se future ne zavrsi
+                        future.get();
+                        uiThreadHandler.post( () -> {
+                            // Toast je deo UI-a i treba ga koristiti sa UI niti
+                            Toast.makeText(mainActivity, "FINISHED", Toast.LENGTH_SHORT).show();
+                        });
+
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 });
 
             }
