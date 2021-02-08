@@ -15,6 +15,7 @@ import com.ika.threading.databinding.FragmentAddNewUserBinding;
 import com.ika.threading.databinding.FragmentSearchBinding;
 import com.ika.threading.db.UserDatabase;
 import com.ika.threading.entities.User;
+import com.ika.threading.threads.CustomDequeThread;
 
 import java.io.Console;
 import java.util.Date;
@@ -24,9 +25,14 @@ public class AddNewUserFragment extends Fragment {
     MainActivity mainActivity;
     FragmentAddNewUserBinding binding;
 
+    private CustomDequeThread customDequeThread;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        customDequeThread = new CustomDequeThread();
+        customDequeThread.start();
     }
 
     @Override
@@ -43,7 +49,7 @@ public class AddNewUserFragment extends Fragment {
                 /*User user = new User(0, "Stanko123", "test", "Stanko", "Stankovic", new Date());
                 userDatabase.userDao().insert(user);*/
 
-                new Thread( () -> {
+                customDequeThread.getRunnableDeque().addLast(( () -> {
                     //posao koji treba da se odradi
 
                     mainActivity = (MainActivity) getActivity();
@@ -57,13 +63,15 @@ public class AddNewUserFragment extends Fragment {
                     SystemClock.sleep(1000);
                     mainActivity.runOnUiThread( () -> binding.addNewUser.setBackgroundColor(Color.BLACK) );
 
+                    SystemClock.sleep(1000);
                     mainActivity.runOnUiThread( () -> binding.addNewUser.setText("THE PROPER WAY") );
 
+                    SystemClock.sleep(1000);
                     binding.addNewUser.post( () -> binding.addNewUser.setText("THE PROPER WAY 2") );
 
                     Log.v ("THREADING", "HEEJ");
 
-                }).start();
+                }));
 
             }
         });
