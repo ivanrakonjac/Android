@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
+import android.os.HandlerThread;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -27,14 +28,14 @@ public class AddNewUserFragment extends Fragment {
     MainActivity mainActivity;
     FragmentAddNewUserBinding binding;
 
-    private CustomLooperThread customLooperThread;
+    private HandlerThread handlerThread;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        customLooperThread = new CustomLooperThread();
-        customLooperThread.start();
+        handlerThread = new HandlerThread("ikas-handler-thread");
+        handlerThread.start();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class AddNewUserFragment extends Fragment {
                 /*User user = new User(0, "Stanko123", "test", "Stanko", "Stankovic", new Date());
                 userDatabase.userDao().insert(user);*/
 
-                Handler newThreadHandler = new Handler(customLooperThread.getLooper());
+                Handler newThreadHandler = new Handler(handlerThread.getLooper());
 
                 newThreadHandler.post( () -> {
                     //posao koji treba da se odradi
