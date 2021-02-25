@@ -1,5 +1,6 @@
 package com.ika.servicesapp.database;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
@@ -13,4 +14,7 @@ public interface WorkoutDAO {
 
     @Query("SELECT * FROM Workout")
     List<Workout> getAll();
+
+    @Query("SELECT * FROM Workout")
+    LiveData< List<Workout>> getAllLiveData();
 }

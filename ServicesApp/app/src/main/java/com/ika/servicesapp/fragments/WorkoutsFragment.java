@@ -18,14 +18,16 @@ import com.ika.servicesapp.database.Workout;
 import com.ika.servicesapp.databinding.FragmentWorkoutsBinding;
 import com.ika.servicesapp.utils.WorkoutAdapter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 
 public class WorkoutsFragment extends Fragment {
 
-    FragmentWorkoutsBinding binding;
-    MainActivity mainActivity;
+    private FragmentWorkoutsBinding binding;
+    private MainActivity mainActivity;
+    private List<Workout> workoutList = new ArrayList<>();
 
     ServiceAppDatabase database;
 
@@ -44,7 +46,10 @@ public class WorkoutsFragment extends Fragment {
         database = ServiceAppDatabase.getInstance(mainActivity.getApplicationContext());
 
         WorkoutAdapter workoutAdapter = new WorkoutAdapter();
-        workoutAdapter.setWorkoutList(database.workoutDao().getAll());
+
+        database.workoutDao().getAllLiveData().observe(getViewLifecycleOwner(), workoutList -> {
+            workoutAdapter.setWorkoutList(workoutList);
+        });
 
 
         binding.floatingActionButton.setOnClickListener( view -> {

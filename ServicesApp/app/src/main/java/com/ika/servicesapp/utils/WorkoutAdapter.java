@@ -22,6 +22,7 @@ public class WorkoutAdapter extends RecyclerView.Adapter<WorkoutAdapter.WorkoutV
 
     public void setWorkoutList(List<Workout> workoutList) {
         this.workoutList = workoutList;
+        // JAKO BITNA LINIJA
         notifyDataSetChanged();
     }
 
