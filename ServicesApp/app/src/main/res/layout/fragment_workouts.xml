@@ -6,11 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".fragments.WorkoutsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Fragment workouts" />
+        android:layout_height="0dp"
+        tools:listitem="@layout/workout_view_holder"
+        tools:ignore="MissingConstraints" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button"
