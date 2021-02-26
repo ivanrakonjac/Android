@@ -1,13 +1,19 @@
 package com.ika.servicesapp.database;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 import javax.inject.Inject;
+
+import dagger.hilt.android.qualifiers.ApplicationContext;
 
 public class WorkoutRepository {
 
@@ -20,9 +26,19 @@ public class WorkoutRepository {
         this.workoutDAO = workoutDAO;
     }
 
-    public void insert(Workout workout){
+    public long insert(Workout workout){
         // Prebacujemo insert na drugu nit
-        executorService.submit(() -> workoutDAO.insert(workout));
+        Future<Long> future = executorService.submit(() -> workoutDAO.insert(workout));
+
+        try {
+            return executorService.submit( () ->  future.get()).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     public List<Workout> getAll(){

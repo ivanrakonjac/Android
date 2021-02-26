@@ -18,8 +18,8 @@ public class WorkoutViewModel extends ViewModel {
         this.workoutRepository = workoutRepository;
     }
 
-    public void insertWorkout(Workout workout){
-        workoutRepository.insert(workout);
+    public long insertWorkout(Workout workout){
+        return workoutRepository.insert(workout);
     }
 
     public List<Workout> getAll(){

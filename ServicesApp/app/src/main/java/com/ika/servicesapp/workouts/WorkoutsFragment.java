@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.ika.servicesapp.MainActivity;
 import com.ika.servicesapp.database.ServiceAppDatabase;
@@ -41,16 +42,6 @@ public class WorkoutsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         mainActivity = (MainActivity) requireActivity();
-
-        /*ServiceAppDatabase database = ServiceAppDatabase.getInstance(mainActivity);
-        WorkoutRepository workoutRepository = new WorkoutRepository(database.workoutDao());
-        ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
-            @NonNull
-            @Override
-            public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
-                return (T) new WorkoutViewModel(workoutRepository);
-            }
-        };*/
         workoutViewModel = new ViewModelProvider(mainActivity).get(WorkoutViewModel.class);
     }
 
@@ -66,7 +57,10 @@ public class WorkoutsFragment extends Fragment {
 
 
         binding.floatingActionButton.setOnClickListener( view -> {
-            workoutViewModel.insertWorkout(new Workout(0, new Date() ,"ExecutorServiceTest", 11, 15));
+            long id = workoutViewModel.insertWorkout(new Workout(0, new Date() ,"ExecutorServiceTest", 11, 15));
+
+            Toast toast = Toast.makeText(getContext(), "" + id, Toast.LENGTH_SHORT);
+            toast.show();
         });
 
         binding.recyclerView.setAdapter(workoutAdapter);
