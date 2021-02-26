@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class WorkoutsFragment extends Fragment {
 
     private FragmentWorkoutsBinding binding;
@@ -40,7 +42,7 @@ public class WorkoutsFragment extends Fragment {
 
         mainActivity = (MainActivity) requireActivity();
 
-        ServiceAppDatabase database = ServiceAppDatabase.getInstance(mainActivity);
+        /*ServiceAppDatabase database = ServiceAppDatabase.getInstance(mainActivity);
         WorkoutRepository workoutRepository = new WorkoutRepository(database.workoutDao());
         ViewModelProvider.Factory factory = new ViewModelProvider.Factory() {
             @NonNull
@@ -48,8 +50,8 @@ public class WorkoutsFragment extends Fragment {
             public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
                 return (T) new WorkoutViewModel(workoutRepository);
             }
-        };
-        workoutViewModel = new ViewModelProvider(mainActivity, factory).get(WorkoutViewModel.class);
+        };*/
+        workoutViewModel = new ViewModelProvider(mainActivity).get(WorkoutViewModel.class);
     }
 
     @Override
@@ -64,7 +66,7 @@ public class WorkoutsFragment extends Fragment {
 
 
         binding.floatingActionButton.setOnClickListener( view -> {
-            workoutViewModel.insertWorkout(new Workout(0, new Date() ,"Proba2", 11, 15));
+            workoutViewModel.insertWorkout(new Workout(0, new Date() ,"ExecutorServiceTest", 11, 15));
         });
 
         binding.recyclerView.setAdapter(workoutAdapter);

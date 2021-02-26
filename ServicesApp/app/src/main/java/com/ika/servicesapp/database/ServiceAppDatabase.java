@@ -25,8 +25,6 @@ public abstract class ServiceAppDatabase extends RoomDatabase {
                             context.getApplicationContext(),
                             ServiceAppDatabase.class,
                             DATABASE_NAME)
-                            // Ovo nikako nije pametno
-                            .allowMainThreadQueries()
                             .build();
                 }
             }

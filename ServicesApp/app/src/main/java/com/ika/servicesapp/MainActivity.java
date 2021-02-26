@@ -8,6 +8,9 @@ import android.os.Bundle;
 import com.ika.servicesapp.databinding.ActivityMainBinding;
 import com.ika.servicesapp.utils.BottomNavigationUtil;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;

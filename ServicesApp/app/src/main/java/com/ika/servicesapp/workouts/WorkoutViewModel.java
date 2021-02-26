@@ -1,5 +1,6 @@
 package com.ika.servicesapp.workouts;
 
+import androidx.hilt.lifecycle.ViewModelInject;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -12,6 +13,7 @@ public class WorkoutViewModel extends ViewModel {
 
     private final WorkoutRepository workoutRepository;
 
+    @ViewModelInject
     public WorkoutViewModel(WorkoutRepository workoutRepository) {
         this.workoutRepository = workoutRepository;
     }
