@@ -1,6 +1,7 @@
 package com.ika.servicesapp.calories;
 
 import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +17,7 @@ import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.media.app.NotificationCompat;
 
+import com.ika.servicesapp.MainActivity;
 import com.ika.servicesapp.R;
 
 import java.util.Timer;
@@ -26,6 +28,9 @@ public class CaloriesService extends Service {
     private final Timer timer = new Timer();
 
     private boolean serviceStarted = false;
+
+
+    public static final String INTENT_ACTION_NOTIFICATION = "com.ika.servicesapp.NOTIFICATION";
 
     private void scheduleTimer(){
         Handler handler = new Handler(Looper.getMainLooper());
@@ -82,10 +87,19 @@ public class CaloriesService extends Service {
     }
 
     private Notification getNotification(){
+
+        Intent intent = new Intent();
+        intent.setClass(this, MainActivity.class);
+        intent.setAction(INTENT_ACTION_NOTIFICATION);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0, intent,0);
+
         return new androidx.core.app.NotificationCompat.Builder(this,"ServiceAppNotChannel")
                                                 .setSmallIcon(R.drawable.baseline_bar_chart_black_18)
                                                 .setContentTitle("Naslov")
                                                 .setContentText("Content text")
+                                                .setContentIntent(pendingIntent)
                                                 .setColorized(true)
                                                 .setColor(ContextCompat.getColor(this,R.color.teal_200))
                                                 .build();

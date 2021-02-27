@@ -33,11 +33,26 @@ public class CaloriesFragment extends Fragment {
         binding = FragmentCaloriesBinding.inflate(inflater, container, false);
 
         binding.startCaloriesService.setOnClickListener( v -> {
-            Intent intent = new Intent();
-            intent.setClass(mainActivity, CaloriesService.class);
-            mainActivity.startService(intent);
+            startWorkout();
+        });
+
+        binding.stopCaloriesService.setOnClickListener( v -> {
+            stopWorkout();
         });
 
         return binding.getRoot();
     }
+
+    private void startWorkout(){
+        Intent intent = new Intent();
+        intent.setClass(mainActivity, CaloriesService.class);
+        mainActivity.startService(intent);
+    }
+
+    private void stopWorkout() {
+        Intent intent = new Intent();
+        intent.setClass(mainActivity, CaloriesService.class);
+        mainActivity.stopService(intent);
+    }
+
 }

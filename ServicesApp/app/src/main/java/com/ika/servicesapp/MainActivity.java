@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
 
+    public static final String INTENT_ACTION_NOTIFICATION = "com.ika.servicesapp.NOTIFICATION";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         if (savedInstanceState == null) {
             setupBottomNavigation();
+        }
+
+        if(getIntent().getAction().equals(INTENT_ACTION_NOTIFICATION)){
+
         }
     }
 
