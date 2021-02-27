@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.IBinder;
@@ -21,6 +22,7 @@ import androidx.lifecycle.LifecycleService;
 import androidx.media.app.NotificationCompat;
 
 import com.ika.servicesapp.MainActivity;
+import com.ika.servicesapp.MyReceiver;
 import com.ika.servicesapp.R;
 
 import java.util.Timer;
@@ -54,6 +56,8 @@ public class CaloriesService extends LifecycleService {
     @Inject
     public LifecycleAwareLocator locator;
 
+    public MyReceiver myReceiver = new MyReceiver();
+
     @Override
     public void onCreate() {
         Log.d(LOG_TAG, "onCreateCommand");
@@ -64,6 +68,11 @@ public class CaloriesService extends LifecycleService {
         getLifecycle().addObserver(sensors);
         getLifecycle().addObserver(locator);
 
+
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+        intentFilter.addAction(Intent.ACTION_POWER_CONNECTED);
+        registerReceiver(myReceiver,intentFilter);
     }
 
     @Override
@@ -101,7 +110,7 @@ public class CaloriesService extends LifecycleService {
     @Override
     public void onDestroy() {
         Log.d(LOG_TAG, "onDestroy");
-
+        unregisterReceiver(myReceiver);
         super.onDestroy();
     }
 

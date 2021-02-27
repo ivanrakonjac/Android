@@ -9,10 +9,13 @@ import com.ika.servicesapp.database.WorkoutRepository;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class WorkoutViewModel extends ViewModel {
 
     private final WorkoutRepository workoutRepository;
 
+    @Inject
     @ViewModelInject
     public WorkoutViewModel(WorkoutRepository workoutRepository) {
         this.workoutRepository = workoutRepository;
