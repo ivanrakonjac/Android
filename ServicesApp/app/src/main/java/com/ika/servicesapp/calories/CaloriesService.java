@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleService;
 import androidx.media.app.NotificationCompat;
 
 import com.ika.servicesapp.MainActivity;
@@ -24,12 +26,14 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class CaloriesService extends Service {
+import javax.inject.Inject;
 
-    private final Timer timer = new Timer();
+import dagger.hilt.android.AndroidEntryPoint;
 
-    private boolean serviceStarted = false;
+@AndroidEntryPoint
+public class CaloriesService extends LifecycleService {
 
+    public static boolean serviceStarted = false;
 
     public static final String INTENT_ACTION_START = "com.ika.servicesapp.START";
     public static final String INTENT_ACTION_POWER = "com.ika.servicesapp.POWER";
@@ -37,45 +41,37 @@ public class CaloriesService extends Service {
 
     public static final String LOG_TAG = "CALORIES_SERVICE_TAG";
 
-    private final AtomicReference<String> motivationMessage = new AtomicReference<>("Trci brze!");
-
-    private void scheduleTimer(){
-        Handler handler = new Handler(Looper.getMainLooper());
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                handler.post(()->{
-                    Toast.makeText(CaloriesService.this,motivationMessage.get(), Toast.LENGTH_SHORT).show();
-                });
-            }
-        },0, 7000);
-
-        serviceStarted = true;
-    }
+    @Inject
+    public LifecycleAwareMotivator motivator;
 
     @Override
     public void onCreate() {
         Log.d(LOG_TAG, "onCreateCommand");
         super.onCreate();
+
+        getLifecycle().addObserver(motivator);
+
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
         Log.d(LOG_TAG, "onStartCommand");
 
         //NotificationManagerCompat.from(this).notify(1, getNotification());
         createNotificationChannel();
         startForeground(1, getNotification());
 
-        switch (intent.getAction()){
+        switch (intent.getAction()) {
             case INTENT_ACTION_START:
-                if(!serviceStarted){
-                    scheduleTimer();
+                if (!serviceStarted) {
+                    motivator.scheduleTimer(this);
+                    serviceStarted = true;
                 }
                 break;
             case INTENT_ACTION_POWER:
-                if(serviceStarted){
-                    changeMotivationMessage();
+                if (serviceStarted) {
+                    motivator.changeMotivationMessage();
                 }
 
                 break;
@@ -91,13 +87,12 @@ public class CaloriesService extends Service {
         Log.d(LOG_TAG, "onDestroy");
 
         super.onDestroy();
-        timer.cancel();
-        serviceStarted = false;
     }
 
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
+        super.onBind(intent);
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -128,7 +123,5 @@ public class CaloriesService extends Service {
                                                 .build();
     }
 
-    private void changeMotivationMessage(){
-        motivationMessage.set("Trci visee!");
-    }
+
 }
