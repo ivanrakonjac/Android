@@ -12,6 +12,7 @@ import android.os.Looper;
 import android.util.Log;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
@@ -50,6 +51,9 @@ public class CaloriesService extends LifecycleService {
     @Inject
     public LifecycleAwareSensors sensors;
 
+    @Inject
+    public LifecycleAwareLocator locator;
+
     @Override
     public void onCreate() {
         Log.d(LOG_TAG, "onCreateCommand");
@@ -58,6 +62,7 @@ public class CaloriesService extends LifecycleService {
         getLifecycle().addObserver(motivator);
         getLifecycle().addObserver(player);
         getLifecycle().addObserver(sensors);
+        getLifecycle().addObserver(locator);
 
     }
 
@@ -77,6 +82,7 @@ public class CaloriesService extends LifecycleService {
                     motivator.scheduleTimer(this);
                     player.startSong(this);
                     sensors.startMeasuring(this);
+                    locator.getLocation(this);
                 }
                 break;
             case INTENT_ACTION_POWER:
