@@ -47,6 +47,9 @@ public class CaloriesService extends LifecycleService {
     @Inject
     public LifecycleAwarePlayer player;
 
+    @Inject
+    public LifecycleAwareSensors sensors;
+
     @Override
     public void onCreate() {
         Log.d(LOG_TAG, "onCreateCommand");
@@ -54,6 +57,7 @@ public class CaloriesService extends LifecycleService {
 
         getLifecycle().addObserver(motivator);
         getLifecycle().addObserver(player);
+        getLifecycle().addObserver(sensors);
 
     }
 
@@ -72,6 +76,7 @@ public class CaloriesService extends LifecycleService {
                     serviceStarted = true;
                     motivator.scheduleTimer(this);
                     player.startSong(this);
+                    sensors.startMeasuring(this);
                 }
                 break;
             case INTENT_ACTION_POWER:
