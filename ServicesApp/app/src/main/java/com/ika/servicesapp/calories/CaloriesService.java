@@ -22,6 +22,7 @@ import com.ika.servicesapp.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CaloriesService extends Service {
 
@@ -30,7 +31,13 @@ public class CaloriesService extends Service {
     private boolean serviceStarted = false;
 
 
+    public static final String INTENT_ACTION_START = "com.ika.servicesapp.START";
+    public static final String INTENT_ACTION_POWER = "com.ika.servicesapp.POWER";
     public static final String INTENT_ACTION_NOTIFICATION = "com.ika.servicesapp.NOTIFICATION";
+
+    public static final String LOG_TAG = "CALORIES_SERVICE_TAG";
+
+    private final AtomicReference<String> motivationMessage = new AtomicReference<>("Trci brze!");
 
     private void scheduleTimer(){
         Handler handler = new Handler(Looper.getMainLooper());
@@ -38,7 +45,7 @@ public class CaloriesService extends Service {
             @Override
             public void run() {
                 handler.post(()->{
-                    Toast.makeText(CaloriesService.this,"Trciii!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CaloriesService.this,motivationMessage.get(), Toast.LENGTH_SHORT).show();
                 });
             }
         },0, 7000);
@@ -48,25 +55,41 @@ public class CaloriesService extends Service {
 
     @Override
     public void onCreate() {
+        Log.d(LOG_TAG, "onCreateCommand");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.d("SERVICES", "onStartCommand");
+        Log.d(LOG_TAG, "onStartCommand");
 
         //NotificationManagerCompat.from(this).notify(1, getNotification());
         createNotificationChannel();
         startForeground(1, getNotification());
 
-        if(!serviceStarted){
-            scheduleTimer();
+        switch (intent.getAction()){
+            case INTENT_ACTION_START:
+                if(!serviceStarted){
+                    scheduleTimer();
+                }
+                break;
+            case INTENT_ACTION_POWER:
+                if(serviceStarted){
+                    changeMotivationMessage();
+                }
+
+                break;
+            default:
+                break;
         }
-        return super.onStartCommand(intent, flags, startId);
+
+        return START_STICKY;
     }
 
     @Override
     public void onDestroy() {
+        Log.d(LOG_TAG, "onDestroy");
+
         super.onDestroy();
         timer.cancel();
         serviceStarted = false;
@@ -103,5 +126,9 @@ public class CaloriesService extends Service {
                                                 .setColorized(true)
                                                 .setColor(ContextCompat.getColor(this,R.color.teal_200))
                                                 .build();
+    }
+
+    private void changeMotivationMessage(){
+        motivationMessage.set("Trci visee!");
     }
 }

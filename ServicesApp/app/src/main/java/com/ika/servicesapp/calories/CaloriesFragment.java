@@ -40,12 +40,17 @@ public class CaloriesFragment extends Fragment {
             stopWorkout();
         });
 
+        binding.powerCaloriesService.setOnClickListener( v -> {
+            powerWorkout();
+        } );
+
         return binding.getRoot();
     }
 
     private void startWorkout(){
         Intent intent = new Intent();
         intent.setClass(mainActivity, CaloriesService.class);
+        intent.setAction(CaloriesService.INTENT_ACTION_START);
         mainActivity.startService(intent);
     }
 
@@ -53,6 +58,13 @@ public class CaloriesFragment extends Fragment {
         Intent intent = new Intent();
         intent.setClass(mainActivity, CaloriesService.class);
         mainActivity.stopService(intent);
+    }
+
+    private void powerWorkout(){
+        Intent intent = new Intent();
+        intent.setClass(mainActivity, CaloriesService.class);
+        intent.setAction(CaloriesService.INTENT_ACTION_POWER);
+        mainActivity.startService(intent);
     }
 
 }
