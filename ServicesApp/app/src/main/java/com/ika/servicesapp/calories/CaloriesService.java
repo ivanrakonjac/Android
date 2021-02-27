@@ -44,6 +44,8 @@ public class CaloriesService extends LifecycleService {
 
     public static final String LOG_TAG = "CALORIES_SERVICE_TAG";
 
+    public Notification notification;
+
     @Inject
     public LifecycleAwareMotivator motivator;
 
@@ -82,7 +84,8 @@ public class CaloriesService extends LifecycleService {
 
         //NotificationManagerCompat.from(this).notify(1, getNotification());
         createNotificationChannel();
-        startForeground(1, getNotification());
+        notification = getNotification();
+        startForeground(1, notification);
 
         switch (intent.getAction()) {
             case INTENT_ACTION_START:

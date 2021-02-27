@@ -34,6 +34,8 @@ public class CaloriesFragment extends Fragment {
                         public void onActivityResult(Boolean isPermissionGranted) {
                             if(isPermissionGranted){
                                 startWorkout();
+                                // Ako zelim da se aplikacija odmah nakon porektanja zatvori
+                                mainActivity.finish();
                             }
                         }
                     });
@@ -55,6 +57,8 @@ public class CaloriesFragment extends Fragment {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION);
             }else{
                 startWorkout();
+                // Ako zelim da se aplikacija odmah nakon porektanja zatvori
+                mainActivity.finish();
             }
 
         });
