@@ -2,6 +2,7 @@ package com.ika.servicesapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
 
 import android.os.Bundle;
 
@@ -29,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if(getIntent().getAction().equals(INTENT_ACTION_NOTIFICATION)){
-
+            NavController navController = BottomNavigationUtil.changeNavHostFragment(R.id.bottom_navigation_calories);
+            /*
+            Ako hocu sa caloriesa na neki drugi fragment
+            if(navController != null) {
+                navController.navigate();
+            }
+            */
         }
     }
 
