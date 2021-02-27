@@ -44,12 +44,16 @@ public class CaloriesService extends LifecycleService {
     @Inject
     public LifecycleAwareMotivator motivator;
 
+    @Inject
+    public LifecycleAwarePlayer player;
+
     @Override
     public void onCreate() {
         Log.d(LOG_TAG, "onCreateCommand");
         super.onCreate();
 
         getLifecycle().addObserver(motivator);
+        getLifecycle().addObserver(player);
 
     }
 
@@ -65,8 +69,9 @@ public class CaloriesService extends LifecycleService {
         switch (intent.getAction()) {
             case INTENT_ACTION_START:
                 if (!serviceStarted) {
-                    motivator.scheduleTimer(this);
                     serviceStarted = true;
+                    motivator.scheduleTimer(this);
+                    player.startSong(this);
                 }
                 break;
             case INTENT_ACTION_POWER:
